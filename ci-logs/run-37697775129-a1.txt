@@ -1,0 +1,356 @@
+== RUN 37697775129 attempt 1 on 15.7.9 / Xcode 16.4 Build version 16F6  ==
+
+===== update.log (tail) =====
+
+===== configure.log (tail) =====
+-- Performing Test CXX_MACRO_PREFIX_MAP - Success
+-- Configure Ghost for Apple Cross platform: iOS
+-- Performing Test _has_no_error_unused_macros
+-- Performing Test _has_no_error_unused_macros - Success
+-- Performing Test _has_cxxflag_float_conversion
+-- Performing Test _has_cxxflag_float_conversion - Success
+-- Performing Test _has_cxxflag_double_promotion
+-- Performing Test _has_cxxflag_double_promotion - Success
+-- Finding Python Module File: certifi/cacert.pem
+-- Tests: Using Python executable: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/macos_arm64/python/bin/python3.13
+-- -- CONFIGURING IOS PLIST -- 
+-- IOS_FIXME: PLATFORM_BUNDLED_LIBRARIES=/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/zlib/lib/libz.1.3.1.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/zlib/lib/libz.1.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/zlib/lib/libz.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/usd/lib/libusd_ms.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/materialx/lib/libMaterialX.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openexr/lib/libIex.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openexr/lib/libIlmThread.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openexr/lib/libOpenEXR.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openexr/lib/libOpenEXRCore.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openexr/lib/libOpenEXRUtil.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/imath/lib/libImath.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openimageio/lib/libOpenImageIO.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openimageio/lib/libOpenImageIO_Util.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/opencolorio/lib/libOpenColorIO.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openvdb/lib/libopenvdb.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/osl/lib/liboslcomp.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/osl/lib/liboslexec.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/osl/lib/liboslnoise.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/osl/lib/liboslquery.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openimagedenoise/lib/libOpenImageDenoise.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openimagedenoise/lib/libOpenImageDenoise_core.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openimagedenoise/lib/libOpenImageDenoise_device_cpu.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/tbb/lib/libtbb.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/tbb/lib/libtbbmalloc.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/tbb/lib/libtbbmalloc_proxy.dylib
+-- C Compiler:   "AppleClang"
+-- C++ Compiler: "AppleClang"
+-- 
+Blender Configuration
+=====================
+
+  Build Options:
+  - WITH_ALEMBIC                        ON
+  - WITH_BULLET                         ON
+  - WITH_CLANG                          OFF
+  - WITH_CYCLES                         ON
+  - WITH_FFTW3                          ON
+  - WITH_FREESTYLE                      ON
+  - WITH_GMP                            ON
+  - WITH_HARU                           ON
+  - WITH_IK_ITASC                       ON
+  - WITH_IK_SOLVER                      ON
+  - WITH_INPUT_NDOF                     OFF
+  - WITH_INPUT_IME                      ON
+  - WITH_INTERNATIONAL                  ON
+  - WITH_MANIFOLD                       ON
+  - WITH_OPENCOLORIO                    ON
+  - WITH_OPENIMAGEDENOISE               ON
+  - WITH_OPENSUBDIV                     ON
+  - WITH_OPENVDB                        ON
+  - WITH_POTRACE                        ON
+  - WITH_PUGIXML                        ON
+  - WITH_QUADRIFLOW                     ON
+  - WITH_TBB                            ON
+  - WITH_USD                            OFF
+  - WITH_MATERIALX                      ON
+  - WITH_XR_OPENXR                      OFF
+
+  Compiler Options:
+  - WITH_BUILDINFO                      ON
+  - WITH_OPTIMIZED_BUILD_TOOLS          ON
+
+  System Options:
+  - WITH_INSTALL_PORTABLE               
+  - WITH_TBB_MALLOC_PROXY               
+  - WITH_MEM_VALGRIND                   OFF
+
+  GHOST Options:
+  - WITH_GHOST_DEBUG                    OFF
+  - WITH_GHOST_SDL                      OFF
+
+  Image Formats:
+  - WITH_IMAGE_CINEON                   ON
+  - WITH_IMAGE_OPENEXR                  ON
+  - WITH_IMAGE_OPENJPEG                 ON
+
+  Audio:
+  - WITH_AUDASPACE                      OFF
+  - WITH_RUBBERBAND                     OFF
+  - WITH_CODEC_FFMPEG                   ON
+  - WITH_CODEC_SNDFILE                  ON
+  - WITH_COREAUDIO                      ON
+  - WITH_JACK                           OFF
+  - WITH_JACK_DYNLOAD                   OFF
+  - WITH_OPENAL                         ON
+  - WITH_PULSEAUDIO                     OFF
+  - WITH_PULSEAUDIO_DYNLOAD             
+  - WITH_SDL                            OFF
+  - WITH_WASAPI                         OFF
+
+  Python:
+  - WITH_PYTHON_INSTALL                 ON
+  - WITH_PYTHON_INSTALL_NUMPY           ON
+  - WITH_PYTHON_INSTALL_ZSTANDARD       OFF
+  - WITH_PYTHON_MODULE                  OFF
+  - WITH_PYTHON_SAFETY                  OFF
+
+  Modifiers:
+  - WITH_MOD_FLUID                      ON
+  - WITH_MOD_OCEANSIM                   ON
+  - WITH_MOD_REMESH                     ON
+
+  Rendering:
+  - WITH_HYDRA                          OFF
+
+  Rendering (Cycles):
+  - WITH_CYCLES_OSL                     OFF
+  - WITH_CYCLES_EMBREE                  ON
+  - WITH_CYCLES_PATH_GUIDING            ON
+
+  Apple Platform Configuration Options:
+  - APPLE_TARGET_DEVICE                 ios
+  - WITH_APPLE_CROSSPLATFORM            ON
+
+  Tests:
+  - WITH_GTESTS                         OFF
+  - CYCLES_TEST_DEVICES                 CPU
+  - WITH_CYCLES_TEST_OSL                OFF
+  - WITH_GPU_RENDER_TESTS               OFF
+  - WITH_GPU_BACKEND_TESTS              OFF
+  - WITH_GPU_DRAW_TESTS                 OFF
+  - WITH_GPU_COMPOSITOR_TESTS           OFF
+  - WITH_GPU_MESH_PAINT_TESTS           OFF
+  - WITH_UI_TESTS                       OFF
+  - WITH_UI_TESTS_HEADLESS              OFF
+  - WITH_UI_TESTS_VULKAN                OFF
+  - WITH_GPU_RENDER_TESTS_VULKAN        OFF
+  - WITH_LINUX_OFFICIAL_RELEASE_TESTS   OFF
+
+  
+-- Configuring done (147.7s)
+-- Generating done (5.5s)
+-- Build files have been written to: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/build_ios
+
+===== build.log error lines =====
+848:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:26:18: error: unknown type name 'diagnostic'
+849:   26 | FMT_PRAGMA_CLANG(diagnostic error "-Wreturn-stack-address")
+851:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:26:35: error: expected ')'
+852:   26 | FMT_PRAGMA_CLANG(diagnostic error "-Wreturn-stack-address")
+855:   26 | FMT_PRAGMA_CLANG(diagnostic error "-Wreturn-stack-address")
+857:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:26:1: error: a type specifier is required for all declarations
+858:   26 | FMT_PRAGMA_CLANG(diagnostic error "-Wreturn-stack-address")
+860:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:26:60: error: expected ';' after top level declarator
+861:   26 | FMT_PRAGMA_CLANG(diagnostic error "-Wreturn-stack-address")
+863:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:30:1: error: unknown type name 'FMT_EXPORT'
+866:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:262:3: error: no template named 'parse_context'
+869:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:260:13: error: no member named 'maybe_set_debug_format' in namespace 'fmt::detail'
+872:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:269:44: error: unexpected type name 'char_type': expected expression
+875:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:269:39: error: no member named 'copy' in namespace 'fmt::detail'
+878:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:281:1: error: unknown type name 'FMT_EXPORT'
+881:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:282:1: error: expected unqualified-id
+884:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:287:1: error: unknown type name 'FMT_EXPORT'
+887:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:288:1: error: expected unqualified-id
+890:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:294:30: error: no template named 'is_tuple_like' in namespace 'fmt'; did you mean 'detail::is_tuple_like_'?
+896:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:295:30: error: no template named 'is_tuple_formattable' in namespace 'fmt'; did you mean 'detail::is_tuple_formattable_'?
+902:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:319:28: error: no template named 'parse_context'
+905:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:327:34: error: use of undeclared identifier 'report_error'
+908:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:336:33: error: 'Char' does not refer to a value
+914:/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:336:28: error: no member named 'copy' in namespace 'fmt::detail'
+917:fatal error: too many errors emitted, stopping now [-ferror-limit=]
+
+===== build.log (tail) =====
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:265:8: warning: 'endIME' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  265 |   void endIME();
+      |        ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:16:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_Window.hh:254:8: note: overridden virtual function is here
+  254 |   void endIME() override
+      |        ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:273:18: warning: 'newDrawingContext' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  273 |   GHOST_Context *newDrawingContext(GHOST_TDrawingContextType type);
+      |                  ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:16:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_Window.hh:284:26: note: overridden virtual function is here
+  284 |   virtual GHOST_Context *newDrawingContext(GHOST_TDrawingContextType type) = 0;
+      |                          ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:279:18: warning: 'invalidate' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  279 |   GHOST_TSuccess invalidate();
+      |                  ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:5:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.hh:18:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_System.hh:12:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/GHOST_ISystem.hh:18:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/GHOST_IWindow.hh:239:26: note: overridden virtual function is here
+  239 |   virtual GHOST_TSuccess invalidate() = 0;
+      |                          ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:285:18: warning: 'setWindowCursorVisibility' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  285 |   GHOST_TSuccess setWindowCursorVisibility(bool visible);
+      |                  ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:16:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_Window.hh:290:26: note: overridden virtual function is here
+  290 |   virtual GHOST_TSuccess setWindowCursorVisibility(bool visible) = 0;
+      |                          ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:291:18: warning: 'setWindowCursorGrab' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  291 |   GHOST_TSuccess setWindowCursorGrab(GHOST_TGrabCursorMode mode);
+      |                  ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:16:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_Window.hh:296:26: note: overridden virtual function is here
+  296 |   virtual GHOST_TSuccess setWindowCursorGrab(GHOST_TGrabCursorMode /*mode*/)
+      |                          ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:297:18: warning: 'setWindowCursorShape' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  297 |   GHOST_TSuccess setWindowCursorShape(GHOST_TStandardCursor shape);
+      |                  ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:16:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_Window.hh:302:26: note: overridden virtual function is here
+  302 |   virtual GHOST_TSuccess setWindowCursorShape(GHOST_TStandardCursor shape) = 0;
+      |                          ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:298:18: warning: 'hasCursorShape' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  298 |   GHOST_TSuccess hasCursorShape(GHOST_TStandardCursor shape);
+      |                  ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:5:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.hh:18:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_System.hh:12:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/GHOST_ISystem.hh:18:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/GHOST_IWindow.hh:296:26: note: overridden virtual function is here
+  296 |   virtual GHOST_TSuccess hasCursorShape(GHOST_TStandardCursor cursor_shape) = 0;
+      |                          ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:304:18: warning: 'setWindowCustomCursorShape' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  304 |   GHOST_TSuccess setWindowCustomCursorShape(const uint8_t *bitmap,
+      |                  ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:16:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_Window.hh:305:26: note: overridden virtual function is here
+  305 |   virtual GHOST_TSuccess setWindowCustomCursorShape(const uint8_t *bitmap,
+      |                          ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:311:12: warning: 'getDPIHint' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  311 |   uint16_t getDPIHint();
+      |            ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:8:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_WindowIOS.hh:16:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_Window.hh:236:12: note: overridden virtual function is here
+  236 |   uint16_t getDPIHint() override
+      |            ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:844:23: warning: '__bridge_transfer' casts have no effect when not using ARC [-Warc-bridge-casts-disallowed-in-nonarc]
+  844 |     NSString *name = (__bridge_transfer NSString *)sys->ios_pending_save_name_;
+      |                       ^~~~~~~~~~~~~~~~~
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:928:72: warning: unused parameter 'a' [-Wunused-parameter]
+  928 |                                               handler:^(UIAlertAction *a) {
+      |                                                                        ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:936:72: warning: unused parameter 'a' [-Wunused-parameter]
+  936 |                                               handler:^(UIAlertAction *a) {
+      |                                                                        ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.mm:168:22: warning: unused function 'convertButton' [-Wunused-function]
+  168 | static GHOST_TButton convertButton(int button)
+      |                      ^~~~~~~~~~~~~
+46 warnings generated.
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_ISystem.cc:31:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.hh:246:18: warning: 'startSecurityScopedFileAccess' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  246 |   GHOST_TSuccess startSecurityScopedFileAccess(const char *filepath);
+      |                  ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_ISystem.cc:15:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/GHOST_ISystem.hh:464:26: note: overridden virtual function is here
+  464 |   virtual GHOST_TSuccess startSecurityScopedFileAccess(const char *filepath) = 0;
+      |                          ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_ISystem.cc:31:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_SystemIOS.hh:247:18: warning: 'stopSecurityScopedFileAccess' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  247 |   GHOST_TSuccess stopSecurityScopedFileAccess(const char *filepath);
+      |                  ^
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/intern/GHOST_ISystem.cc:15:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/ghost/GHOST_ISystem.hh:465:26: note: overridden virtual function is here
+  465 |   virtual GHOST_TSuccess stopSecurityScopedFileAccess(const char *filepath) = 0;
+      |                          ^
+2 warnings generated.
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/cycles/blender/viewport.cpp:6:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/intern/cycles/blender/util.h:9:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/source/blender/blenkernel/BKE_main.hh:28:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/source/blender/blenlib/BLI_map.hh:58:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/source/blender/blenlib/BLI_hash.hh:70:
+In file included from /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/source/blender/blenlib/BLI_string_ref.hh:35:
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:26:18: error: unknown type name 'diagnostic'
+   26 | FMT_PRAGMA_CLANG(diagnostic error "-Wreturn-stack-address")
+      |                  ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:26:35: error: expected ')'
+   26 | FMT_PRAGMA_CLANG(diagnostic error "-Wreturn-stack-address")
+      |                                   ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:26:17: note: to match this '('
+   26 | FMT_PRAGMA_CLANG(diagnostic error "-Wreturn-stack-address")
+      |                 ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:26:1: error: a type specifier is required for all declarations
+   26 | FMT_PRAGMA_CLANG(diagnostic error "-Wreturn-stack-address")
+      | ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:26:60: error: expected ';' after top level declarator
+   26 | FMT_PRAGMA_CLANG(diagnostic error "-Wreturn-stack-address")
+      |                                                            ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:30:1: error: unknown type name 'FMT_EXPORT'
+   30 | FMT_EXPORT
+      | ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:262:3: error: no template named 'parse_context'
+  262 |   parse_context<Char>& ctx;
+      |   ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:260:13: error: no member named 'maybe_set_debug_format' in namespace 'fmt::detail'
+  260 |     detail::maybe_set_debug_format(f, true);
+      |     ~~~~~~~~^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:269:44: error: unexpected type name 'char_type': expected expression
+  269 |     if (i > 0) ctx.advance_to(detail::copy<char_type>(separator, ctx.out()));
+      |                                            ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:269:39: error: no member named 'copy' in namespace 'fmt::detail'
+  269 |     if (i > 0) ctx.advance_to(detail::copy<char_type>(separator, ctx.out()));
+      |                               ~~~~~~~~^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:281:1: error: unknown type name 'FMT_EXPORT'
+  281 | FMT_EXPORT
+      | ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:282:1: error: expected unqualified-id
+  282 | template <typename T> struct is_tuple_like {
+      | ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:287:1: error: unknown type name 'FMT_EXPORT'
+  287 | FMT_EXPORT
+      | ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:288:1: error: expected unqualified-id
+  288 | template <typename T, typename C> struct is_tuple_formattable {
+      | ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:294:30: error: no template named 'is_tuple_like' in namespace 'fmt'; did you mean 'detail::is_tuple_like_'?
+  294 |                  enable_if_t<fmt::is_tuple_like<Tuple>::value &&
+      |                              ^~~~~
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:122:29: note: 'detail::is_tuple_like_' declared here
+  122 | template <typename T> class is_tuple_like_ {
+      |                             ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:295:30: error: no template named 'is_tuple_formattable' in namespace 'fmt'; did you mean 'detail::is_tuple_formattable_'?
+  295 |                              fmt::is_tuple_formattable<Tuple, Char>::value>> {
+      |                              ^~~~~
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:160:7: note: 'detail::is_tuple_formattable_' declared here
+  160 | class is_tuple_formattable_ {
+      |       ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:319:28: error: no template named 'parse_context'
+  319 |   FMT_CONSTEXPR auto parse(parse_context<Char>& ctx) -> const Char* {
+      |                            ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:327:34: error: use of undeclared identifier 'report_error'
+  327 |     if (it != end && *it != '}') report_error("invalid format specifier");
+      |                                  ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:336:33: error: 'Char' does not refer to a value
+  336 |     ctx.advance_to(detail::copy<Char>(opening_bracket_, ctx.out()));
+      |                                 ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:292:36: note: declared here
+  292 | template <typename Tuple, typename Char>
+      |                                    ^
+/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fmt/include/fmt/ranges.h:336:28: error: no member named 'copy' in namespace 'fmt::detail'
+  336 |     ctx.advance_to(detail::copy<Char>(opening_bracket_, ctx.out()));
+      |                    ~~~~~~~~^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+note: Run script build phase 'Generate CMakeFiles/ZERO_CHECK' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'ZERO_CHECK' from project 'Blender')
+note: Run script build phase 'Generate source/creator/CMakeFiles/locales' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'locales' from project 'Blender')
+note: Run script build phase 'CMake PostBuild Rules' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'install' from project 'Blender')
+note: Run script build phase 'Generate source/creator/buildinfo.h' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'buildinfo' from project 'Blender')
+note: Run script build phase 'Generate source/creator/CMakeFiles/buildinfo' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'buildinfo' from project 'Blender')
+note: Run script build phase 'Generate CMakeFiles/blender_cross_tools_compile' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'blender_cross_tools_compile' from project 'Blender')
+note: Run script build phase 'Generate CMakeFiles/ALL_BUILD' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'ALL_BUILD' from project 'Blender')
+** BUILD FAILED **
+
+
+===== CMakeError.log (tail) =====
