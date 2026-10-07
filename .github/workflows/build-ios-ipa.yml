@@ -90,6 +90,9 @@ jobs:
             blender/lib/macos_arm64
           key: ${{ steps.deps.outputs.cache-primary-key }}
 
+      - name: Match iOS Python SDK to installed dependency libraries
+        run: python3 configure_ios_python.py
+
       - name: Configure (CMake, Xcode generator, iOS device target)
         run: |
           set -o pipefail
