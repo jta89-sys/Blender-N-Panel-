@@ -131,3 +131,10 @@ if(OPENIMAGEIO_FOUND)
     set_property(TARGET OpenImageIO::OpenImageIO APPEND PROPERTY INTERFACE_LINK_LIBRARIES OpenImageIO::OpenImageIO_Util)
   endif()
 endif()
+
+# The image conversion tool runs on the macOS build host, not on iOS.
+find_program(OPENIMAGEIO_HOST_TOOL NAMES oiiotool HINTS "${CMAKE_SOURCE_DIR}/lib/macos_arm64/openimageio/bin" NO_DEFAULT_PATH)
+if(OPENIMAGEIO_HOST_TOOL AND NOT TARGET OpenImageIO::oiiotool)
+  add_executable(OpenImageIO::oiiotool IMPORTED GLOBAL)
+  set_target_properties(OpenImageIO::oiiotool PROPERTIES IMPORTED_LOCATION "${OPENIMAGEIO_HOST_TOOL}")
+endif()
