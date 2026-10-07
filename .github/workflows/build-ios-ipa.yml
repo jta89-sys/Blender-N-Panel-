@@ -91,11 +91,36 @@ jobs:
             blender/lib/macos_arm64
           key: ${{ steps.deps.outputs.cache-primary-key }}
 
+      - name: Restore added iOS dependencies
+        id: added-deps
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            blender/lib/ios_arm64/fmt
+            blender/lib/ios_arm64/eigen
+            blender/lib/ios_arm64/abseil
+            blender/lib/ios_arm64/ceres
+          key: ios-added-deps-${{ runner.arch }}-${{ hashFiles('blender/build_files/build_environment/cmake/versions.cmake') }}-v1
+
       - name: Build missing iOS fmt dependency
         run: python3 build_missing_fmt.py
 
       - name: Install missing iOS Eigen headers and metadata
         run: python3 build_missing_eigen.py
+
+      - name: Build missing iOS Ceres and Abseil
+        run: python3 build_missing_ceres.py
+
+      - name: Save added dependencies before Blender compilation
+        if: steps.added-deps.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            blender/lib/ios_arm64/fmt
+            blender/lib/ios_arm64/eigen
+            blender/lib/ios_arm64/abseil
+            blender/lib/ios_arm64/ceres
+          key: ${{ steps.added-deps.outputs.cache-primary-key }}
 
       - name: Match iOS Python SDK to installed dependency libraries
         run: python3 configure_ios_python.py
