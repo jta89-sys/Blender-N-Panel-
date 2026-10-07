@@ -101,6 +101,8 @@ jobs:
         run: |
           cp FindOpenEXR.cmake blender/build_files/cmake/Modules/FindOpenEXR.cmake
           cp Findfmt.cmake blender/build_files/cmake/Modules/Findfmt.cmake
+          cp FindOpenImageIO.cmake blender/build_files/cmake/Modules/FindOpenImageIO.cmake
+          cp FindOpenColorIO.cmake blender/build_files/cmake/Modules/FindOpenColorIO.cmake
 
       - name: Configure (CMake, Xcode generator, iOS device target)
         run: |
