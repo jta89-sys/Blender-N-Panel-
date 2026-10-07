@@ -57,3 +57,12 @@ anchor = "int _PyArg_CheckPositional(const char *name, Py_ssize_t nargs, Py_ssiz
 assert source.count(anchor) == 1, "Python argument API patch anchor changed"
 compat.write_text(source.replace(anchor, "#ifndef _PyArg_CheckPositional\n" + anchor + "\n#endif"))
 print("Guarded existing CPython argument-check macro")
+
+# The matching implementation must also be excluded when CPython supplies it.
+compat_impl = root/"source/blender/python/generic/python_compat.cc"
+source = compat_impl.read_text()
+marker = "/* Removed in Python 3.13. */"
+assert source.count(marker) == 1, "Python compatibility implementation anchor changed"
+assert source.rstrip().endswith("}"), "Unexpected Python compatibility implementation ending"
+compat_impl.write_text(source.replace(marker, "#ifndef _PyArg_CheckPositional\n" + marker) + "\n#endif\n")
+print("Guarded existing CPython argument-check implementation")
