@@ -48,3 +48,12 @@ if tuple(map(int, version.split("."))) < (3, 13):
 #endif"""
     header.write_text(source.replace(anchor, replacement))
     print("Enabled pre-3.13 CPython integer API compatibility")
+
+# Python 3.11/3.12 already expose _PyArg_CheckPositional as a macro.
+# Re-declaring it expands that macro where a function name is expected.
+compat = root/"source/blender/python/generic/python_compat.hh"
+source = compat.read_text()
+anchor = "int _PyArg_CheckPositional(const char *name, Py_ssize_t nargs, Py_ssize_t min, Py_ssize_t max);"
+assert source.count(anchor) == 1, "Python argument API patch anchor changed"
+compat.write_text(source.replace(anchor, "#ifndef _PyArg_CheckPositional\n" + anchor + "\n#endif"))
+print("Guarded existing CPython argument-check macro")
