@@ -33,3 +33,18 @@ s=s.replace(anchor,anchor+sdk_cache)
 
 p.write_text(s)
 print("Configured target Python",version,"host",host)
+
+# Blender's current source uses the public Python 3.13 integer conversion API.
+# Older bundled CPython SDKs expose the same int conversion as _PyLong_AsInt.
+if tuple(map(int, version.split("."))) < (3, 13):
+    header = root/"source/blender/python/generic/py_capi_utils.hh"
+    source = header.read_text()
+    anchor = "  return int32_t(PyLong_AsInt(value));"
+    assert source.count(anchor) == 1, "Python integer API patch anchor changed"
+    replacement = """#if PY_VERSION_HEX < 0x030D0000
+  return int32_t(_PyLong_AsInt(value));
+#else
+  return int32_t(PyLong_AsInt(value));
+#endif"""
+    header.write_text(source.replace(anchor, replacement))
+    print("Enabled pre-3.13 CPython integer API compatibility")
