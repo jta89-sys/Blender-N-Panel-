@@ -15,7 +15,16 @@ Upload this folder's contents, including .github/workflows, to your own GitHub
 repository. In Actions run the build-ios-ipa workflow on a macOS runner with
 Xcode. Download the resulting Blender-ios-ipa artifact and re-sign the IPA with
 your sideloading tool before installation. Builds can be expensive and lengthy.
-The workflow runs manually; no build has been started here.
+The workflow runs manually. Builds have been started in this repository and are
+being debugged; a failed run's debug artifact is not an IPA. The workflow publishes
+a Blender-ios-ipa artifact and a release only after compilation and validation succeed.
+
+## Dependency compatibility
+The current ios source expects newer dependencies than its precompiled iOS bundle.
+The workflow selects the bundled Python 3.11 target SDK separately from the macOS
+host interpreter, restores OpenEXR discovery and builds missing fmt for iOS arm64
+from the version and SHA256 in Blender's dependency manifest. Native compilation
+and device behavior remain unverified until a complete build and iPad test pass.
 
 ## Validation and limits
 Patch anchors checked against the Blender ios branch fetched on 2026-10-07.
