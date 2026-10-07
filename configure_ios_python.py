@@ -125,3 +125,26 @@ anchor = "#if PY_VERSION_HEX < 0x030d0000"
 assert source.count(anchor) == 1, "Python minimum-version guard changed"
 intern_header.write_text(source.replace(anchor,
     "#if PY_VERSION_HEX < 0x030d0000 && !defined(BLENDER_IPAD_PYTHON_COMPAT)"))
+
+# Driver opcode safety remains enabled. Only compile cases present in this SDK.
+# Python 3.11 spellings below are from Blender v3.6's approved opcode list.
+driver = root/"source/blender/python/intern/bpy_driver_bytecode.cc"
+source = driver.read_text()
+assert source.count("static bool is_opcode_secure") == 1
+assert source.count("  switch (opcode) {") == 1
+legacy = (
+    "UNARY_POSITIVE", "LIST_TO_TUPLE", "JUMP_IF_FALSE_OR_POP",
+    "JUMP_IF_TRUE_OR_POP", "POP_JUMP_FORWARD_IF_FALSE",
+    "POP_JUMP_FORWARD_IF_TRUE", "POP_JUMP_FORWARD_IF_NONE",
+    "POP_JUMP_FORWARD_IF_NOT_NONE", "POP_JUMP_BACKWARD_IF_FALSE",
+    "POP_JUMP_BACKWARD_IF_TRUE", "POP_JUMP_BACKWARD_IF_NONE",
+    "POP_JUMP_BACKWARD_IF_NOT_NONE", "KW_NAMES", "PRECALL",
+)
+cases = "\n".join("    OK_OP(" + op + ")" for op in legacy)
+source = source.replace("  switch (opcode) {",
+    "  switch (opcode) {\n#  if PY_VERSION_HEX < 0x030C0000\n" + cases + "\n#  endif")
+source, count = re.subn(r"(?m)^(    OK_OP\(([A-Z_0-9]+)\).*)$",
+    lambda m: "#  ifdef " + m.group(2) + "\n" + m.group(1) + "\n#  endif", source)
+assert count > 60, "Unexpected driver opcode whitelist"
+driver.write_text(source)
+print("Matched driver safety whitelist to target Python opcodes")
