@@ -66,3 +66,53 @@ assert source.count(marker) == 1, "Python compatibility implementation anchor ch
 assert source.rstrip().endswith("}"), "Unexpected Python compatibility implementation ending"
 compat_impl.write_text(source.replace(marker, "#ifndef _PyArg_CheckPositional\n" + marker) + "\n#endif\n")
 print("Guarded existing CPython argument-check implementation")
+
+# Supply newer public APIs to the older iOS SDK through a pinned compatibility header.
+import hashlib
+from urllib.request import urlopen
+compat_sha = "ebbf075e3bd317e11a39215c50debd3f301590de"
+compat_hash = "bac7a94e7625cf3eed5ff54104f46d370f9d82e1c5acf2af1e11d0e3029c15a6"
+with urlopen(f"https://raw.githubusercontent.com/python/pythoncapi-compat/{compat_sha}/pythoncapi_compat.h", timeout=60) as response:
+    data = response.read()
+assert hashlib.sha256(data).hexdigest() == compat_hash, "Python C API compatibility checksum mismatch"
+sdk_include = ios/"include"/("python"+version)
+(sdk_include/"pythoncapi_compat.h").write_bytes(data)
+shim = """#pragma once
+#include "pythoncapi_compat.h"
+/* Python 3.11 stores the raised exception as type/value/traceback. */
+#if PY_VERSION_HEX < 0x030C0000
+static inline PyObject *PyErr_GetRaisedException(void)
+{
+  PyObject *type = NULL, *value = NULL, *traceback = NULL;
+  PyErr_Fetch(&type, &value, &traceback);
+  if (type == NULL) {
+    return NULL;
+  }
+  PyErr_NormalizeException(&type, &value, &traceback);
+  if (value != NULL && traceback != NULL) {
+    PyException_SetTraceback(value, traceback);
+  }
+  Py_XDECREF(type);
+  Py_XDECREF(traceback);
+  return value;
+}
+static inline void PyErr_SetRaisedException(PyObject *exception)
+{
+  if (exception == NULL) {
+    PyErr_Clear();
+    return;
+  }
+  PyObject *type = (PyObject *)Py_TYPE(exception);
+  Py_INCREF(type);
+  PyObject *traceback = PyException_GetTraceback(exception);
+  PyErr_Restore(type, exception, traceback);
+}
+#endif
+"""
+(sdk_include/"blender_ipad_python_compat.h").write_text(shim)
+python_header = sdk_include/"Python.h"
+source = python_header.read_text()
+include = '#include "blender_ipad_python_compat.h"'
+if include not in source:
+    python_header.write_text(source + "\n" + include + "\n")
+print("Installed pinned Python C API compatibility in iOS target SDK")
