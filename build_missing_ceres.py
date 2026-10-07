@@ -49,6 +49,7 @@ for name,folder,args in recipes:
     subprocess.run(["cmake","-S",str(roots[0]),"-B",build,"-G","Xcode",
                     "-DCMAKE_SYSTEM_NAME=iOS","-DCMAKE_OSX_SYSROOT=iphoneos",
                     "-DCMAKE_OSX_ARCHITECTURES=arm64","-DCMAKE_OSX_DEPLOYMENT_TARGET=15.0",
+                    "-DIOS_DEPLOYMENT_TARGET=15.0","-DIOS_PLATFORM=OS",
                     "-DCMAKE_CXX_STANDARD=20","-DCMAKE_INSTALL_PREFIX="+str(prefix),
                     "-DBUILD_SHARED_LIBS=OFF","-DCMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED=NO",*args],check=True)
     subprocess.run(["cmake","--build",build,"--config","Release","--target","install","--parallel","3","--","-quiet"],check=True)
