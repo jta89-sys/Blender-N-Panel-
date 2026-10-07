@@ -1,0 +1,198 @@
+# Builds Blender's experimental "ios" branch into a sideloadable (unsigned) IPA.
+# - On success: publishes the IPA as a GitHub Release (and as a run artifact).
+# - On failure: commits a condensed error log to ci-logs/ in this repo,
+#   so the build can be debugged remotely via the GitHub API.
+
+name: Build Blender iOS IPA - M1 Revision
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-ipa:
+    name: Build Blender (ios branch) for iPadOS
+    runs-on: macos-15
+    timeout-minutes: 350
+
+    steps:
+      - name: Check out build helpers
+        uses: actions/checkout@v4
+
+      - name: Clone Blender ios branch from blender.org WITH Git LFS (real datafiles)
+        run: |
+          git lfs install
+          git clone --depth 1 --branch ios https://projects.blender.org/blender/blender.git blender
+          cd blender && git lfs pull
+          test "$(wc -c < release/datafiles/startup.blend)" -gt 100000
+          git rev-parse HEAD > ../blender-source-commit.txt
+          echo "startup.blend bytes: $(wc -c < release/datafiles/startup.blend) (must be >100000, not 131)"
+
+      - name: Toolchain info
+        run: |
+          sw_vers
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-version
+          cmake --version
+          python3 --version
+          git lfs install
+
+      - name: Cache precompiled dependency libraries
+        uses: actions/cache@v4
+        with:
+          path: |
+            blender/lib/ios_arm64
+            blender/lib/macos_arm64
+          key: blender-ios-libs-${{ runner.arch }}-v2
+
+      - name: Fetch assets + precompiled libraries (iOS + macOS host tools)
+        working-directory: blender
+        run: |
+          set -o pipefail
+          python3 ./build_files/utils/make_update.py --no-blender --use-ios-libraries 2>&1 | tee update.log
+
+      - name: "Patch sources build-20 (cursor revert to build-17 + robust logged back button)"
+        run: |
+          python3 source_patch.py
+          python3 bottom_npanel_patch.py
+
+      - name: Configure (CMake, Xcode generator, iOS device target)
+        run: |
+          set -o pipefail
+          cmake -S blender -B build_ios -G Xcode \
+            -DAPPLE_TARGET_DEVICE=ios \
+            -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED=NO \
+            -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED=NO \
+            -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY="" \
+            -DCMAKE_XCODE_ATTRIBUTE_DEVELOPMENT_TEAM="" \
+            -DCMAKE_BUILD_TYPE=Release 2>&1 | tee configure.log
+
+      - name: Build and assemble Blender.app
+        run: |
+          set -o pipefail
+          cmake --build build_ios --config Release --target install -- -quiet -jobs 3 2>&1 | tee build.log
+
+      - name: Add Blender app icon (non-fatal)
+        continue-on-error: true
+        run: |
+          set +e
+          APP=$(find build_ios -type d -name "Blender.app" | grep -Ei "iphoneos|Release" | head -1)
+          [ -z "$APP" ] && APP=$(find build_ios -type d -name "Blender.app" | head -1)
+          [ -z "$APP" ] && { echo 'no app bundle; skip icon'; exit 0; }
+          python3 -m pip install --quiet --break-system-packages pillow cairosvg 2>/dev/null || pip3 install --quiet pillow cairosvg 2>/dev/null || true
+          echo 'IyEvdXNyL2Jpbi9lbnYgcHl0aG9uMwojIE5vbi1mYXRhbDogcmVuZGVyIEJsZW5kZXIgbG9nbyBvbiBjaGFyY29hbCAtPiBhcHAgaWNvbnMgKyBJbmZvLnBsaXN0IGtleXMuCmltcG9ydCBzeXMsIG9zCmFwcCA9IHN5cy5hcmd2WzFdOyBzdmcgPSBzeXMuYXJndlsyXQp0cnk6CiAgICBpbXBvcnQgaW8sIGNhaXJvc3ZnLCBwbGlzdGxpYgogICAgZnJvbSBQSUwgaW1wb3J0IEltYWdlCiAgICBwbmcgPSBjYWlyb3N2Zy5zdmcycG5nKHVybD1zdmcsIG91dHB1dF93aWR0aD03NjAsIG91dHB1dF9oZWlnaHQ9NzYwKQogICAgbG9nbyA9IEltYWdlLm9wZW4oaW8uQnl0ZXNJTyhwbmcpKS5jb252ZXJ0KCJSR0JBIikKICAgIGJnID0gSW1hZ2UubmV3KCJSR0JBIiwgKDEwMjQsIDEwMjQpLCAoMzgsIDM4LCAzOCwgMjU1KSkgICMgQmxlbmRlciBjaGFyY29hbAogICAgYmcucGFzdGUobG9nbywgKCgxMDI0IC0gbG9nby53aWR0aCkvLzIsICgxMDI0IC0gbG9nby5oZWlnaHQpLy8yKSwgbG9nbykKICAgIGljb24gPSBiZy5jb252ZXJ0KCJSR0IiKQogICAgc2l6ZXMgPSB7IkFwcEljb242MHg2MEAyeC5wbmciOjEyMCwgIkFwcEljb243Nng3NkAyeH5pcGFkLnBuZyI6MTUyLAogICAgICAgICAgICAgIkFwcEljb244My41eDgzLjVAMnh+aXBhZC5wbmciOjE2NywgIkFwcEljb24xMDI0eDEwMjQucG5nIjoxMDI0fQogICAgZm9yIG5hbWUsIHB4IGluIHNpemVzLml0ZW1zKCk6CiAgICAgICAgaWNvbi5yZXNpemUoKHB4LCBweCksIEltYWdlLkxBTkNaT1MpLnNhdmUob3MucGF0aC5qb2luKGFwcCwgbmFtZSkpCiAgICBwbGlzdF9wYXRoID0gb3MucGF0aC5qb2luKGFwcCwgIkluZm8ucGxpc3QiKQogICAgd2l0aCBvcGVuKHBsaXN0X3BhdGgsICJyYiIpIGFzIGY6CiAgICAgICAgcGwgPSBwbGlzdGxpYi5sb2FkKGYpCiAgICBwcmltID0geyJDRkJ1bmRsZVByaW1hcnlJY29uIjogeyJDRkJ1bmRsZUljb25GaWxlcyI6IFsiQXBwSWNvbjYweDYwIl19fQogICAgcHJpbV9pcGFkID0geyJDRkJ1bmRsZVByaW1hcnlJY29uIjogeyJDRkJ1bmRsZUljb25GaWxlcyI6IFsiQXBwSWNvbjc2eDc2IiwgIkFwcEljb244My41eDgzLjUiXX19CiAgICBwbFsiQ0ZCdW5kbGVJY29ucyJdID0gcHJpbQogICAgcGxbIkNGQnVuZGxlSWNvbnN+aXBhZCJdID0gcHJpbV9pcGFkCiAgICB3aXRoIG9wZW4ocGxpc3RfcGF0aCwgIndiIikgYXMgZjoKICAgICAgICBwbGlzdGxpYi5kdW1wKHBsLCBmLCBmbXQ9cGxpc3RsaWIuRk1UX0JJTkFSWSkKICAgIHByaW50KCJpY29uOiBpbnN0YWxsZWQgQXBwSWNvbiBzZXQgKyBJbmZvLnBsaXN0IGtleXMiKQpleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICBwcmludCgiaWNvbjogc2tpcHBlZCAoIiwgZSwgIikiKQogICAgc3lzLmV4aXQoMCkK' | base64 -d > /tmp/mkicon.py
+          python3 /tmp/mkicon.py "$APP" "blender/release/datafiles/icons_svg/blender.svg" || true
+          exit 0
+
+      - name: Validate device app before packaging
+        run: python3 validate_app.py build_ios
+
+      - name: Install viewport, URL and extension fixes
+        run: python3 install_python_fixes.py build_ios
+
+      - name: Package IPA
+        run: |
+          set -x
+          APP=$(find build_ios -type d -name "Blender.app" | grep -Ei "iphoneos|Release" | head -1)
+          if [ -z "$APP" ]; then APP=$(find build_ios -type d -name "Blender.app" | head -1); fi
+          test -n "$APP" || { echo "Blender.app not found"; exit 1; }
+          echo "Found app bundle: $APP"
+          # Strip non-runtime build artifacts: on-device signers (LiveContainer,
+          # SideStore, Impactor) try to sign every Mach-O in the bundle and fail
+          # on object files like python.o. These are linker leftovers, not needed
+          # at runtime, so removing them is safe.
+          echo "Removing *.o / *.a build artifacts:"
+          find "$APP" \( -name "*.o" -o -name "*.a" \) -print -delete || true
+
+          # Bundle ALL dependency dylibs where the binary's @rpath looks: Assets/lib.
+          # The branch stubs this out for iOS (IOS_FIXME) and only copies libs when
+          # a codesigning identity exists, which it doesn't on a CI runner -- so the
+          # app crashes at launch with "Library not loaded: @rpath/libz.1.dylib".
+          # We copy them ourselves; Impactor re-signs everything on-device anyway.
+          LIBDST="$APP/Assets/lib"
+          mkdir -p "$LIBDST"
+          IOSLIB=""
+          for d in blender/lib/ios_arm64 blender/lib/ios_*; do
+            [ -d "$d" ] && IOSLIB="$d" && break
+          done
+          echo "iOS precompiled lib dir: ${IOSLIB:-NOT_FOUND}"
+          if [ -n "$IOSLIB" ]; then
+            # -L dereferences version symlinks (libz.1.dylib -> libz.1.3.dylib) so the
+            # exact soname the binary requests exists as a real file in the bundle.
+            find "$IOSLIB" -name '*.dylib' \( -type f -o -type l \) -exec cp -fL {} "$LIBDST/" \; || true
+          fi
+          # Python's shared lib is dlopened by Blender too; make sure it's reachable.
+          find "$APP" -name 'libpython*.dylib' -exec cp -fn {} "$LIBDST/" \; 2>/dev/null || true
+          echo "dylibs now in Assets/lib: $(find "$LIBDST" -maxdepth 1 -name '*.dylib' | wc -l | tr -d ' ')"
+          echo "libz present: $(ls "$LIBDST"/libz*.dylib 2>/dev/null || echo NO)"
+
+          # Ad-hoc signature: Sideloadly/AltStore re-signs with the user's Apple ID.
+          codesign --force --deep --sign - "$APP"
+          codesign --verify --deep --strict "$APP"
+
+          mkdir -p Payload
+          cp -R "$APP" Payload/
+          # Remove dangling symlinks, then zip while DEREFERENCING the rest
+          # (note: no -y flag) so the resulting IPA contains zero symlink
+          # entries. Windows signing tools like Impactor need a special
+          # privilege to create symlinks during extraction and otherwise
+          # fail with "os error 1314 / A required privilege is not held".
+          find Payload -type l ! -exec test -e {} \; -delete || true
+          echo "Symlinks left in Payload: $(find Payload -type l | wc -l | tr -d ' ')"
+          zip -qr Blender-ios.ipa Payload
+          unzip -tq Blender-ios.ipa
+          shasum -a 256 Blender-ios.ipa > Blender-ios.ipa.sha256
+          ls -lh Blender-ios.ipa
+
+      - name: Upload IPA as run artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Blender-ios-ipa
+          path: |
+            Blender-ios.ipa
+            Blender-ios.ipa.sha256
+            blender-source-commit.txt
+            source_patch.py
+          if-no-files-found: error
+
+      - name: Publish IPA as a GitHub Release
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "m1-build-${{ github.run_number }}" Blender-ios.ipa Blender-ios.ipa.sha256 blender-source-commit.txt source_patch.py \
+            --repo "${{ github.repository }}" \
+            --title "Blender iOS build #${{ github.run_number }}" \
+            --notes "Experimental M1 revision IPA; device testing required. Built from blender/blender@ios (run ${{ github.run_id }}). Sideload with Sideloadly or AltStore. Free Apple ID = 7-day expiry."
+
+      - name: Commit condensed failure log to repo (remote debugging)
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          {
+            echo "== RUN ${{ github.run_id }} attempt ${{ github.run_attempt }} on $(sw_vers -productVersion) / $(xcodebuild -version | tr '\n' ' ') =="
+            echo; echo "===== update.log (tail) ====="; tail -n 60 blender/update.log 2>/dev/null
+            echo; echo "===== configure.log (tail) ====="; tail -n 120 configure.log 2>/dev/null
+            echo; echo "===== build.log error lines ====="; grep -inE "error[: ]|fatal error|ld: " build.log 2>/dev/null | tail -n 150
+            echo; echo "===== build.log (tail) ====="; tail -n 200 build.log 2>/dev/null
+            echo; echo "===== CMakeError.log (tail) ====="; tail -n 80 build_ios/CMakeFiles/CMakeError.log 2>/dev/null
+          } > failure-report.txt || true
+          gh api -X PUT "repos/${{ github.repository }}/contents/ci-logs/run-${{ github.run_id }}-a${{ github.run_attempt }}.txt" \
+            -f message="CI failure log (run ${{ github.run_id }})" \
+            -f content="$(base64 -i failure-report.txt | tr -d '\n')" || true
+
+      - name: Upload full debug logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-logs
+          path: |
+            build.log
+            configure.log
+            blender/update.log
+            build_ios/CMakeCache.txt
+            build_ios/CMakeFiles/CMakeError.log
+          if-no-files-found: ignore
