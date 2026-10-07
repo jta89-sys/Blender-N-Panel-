@@ -40,6 +40,12 @@ for name,folder,args in recipes:
     roots=[p for p in dest.iterdir() if p.is_dir() and (p/"CMakeLists.txt").is_file()]
     if len(roots)!=1: raise RuntimeError("Expected one "+folder+" source root")
     build=folder+"-build"
+    if name=="CERES":
+        for package,parent in [("absl",sdk/"abseil"),("Eigen3",sdk/"eigen")]:
+            configs=list(parent.glob("**/"+package+"Config.cmake"))
+            if len(configs)!=1: raise RuntimeError("Expected one installed "+package+" config, got "+str(configs))
+            args.append("-D"+package+"_DIR="+str(configs[0].parent))
+            print("Using",package,"config",configs[0])
     subprocess.run(["cmake","-S",str(roots[0]),"-B",build,"-G","Xcode",
                     "-DCMAKE_SYSTEM_NAME=iOS","-DCMAKE_OSX_SYSROOT=iphoneos",
                     "-DCMAKE_OSX_ARCHITECTURES=arm64","-DCMAKE_OSX_DEPLOYMENT_TARGET=15.0",
