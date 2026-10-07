@@ -32,7 +32,8 @@ else:
                     "-DCMAKE_SYSTEM_NAME=iOS","-DCMAKE_OSX_SYSROOT=iphoneos",
                     "-DCMAKE_OSX_ARCHITECTURES=arm64","-DCMAKE_OSX_DEPLOYMENT_TARGET=15.0",
                     "-DCMAKE_INSTALL_PREFIX="+str(prefix),"-DBUILD_SHARED_LIBS=OFF",
-                    "-DBUILD_TESTING=OFF","-DEIGEN_BUILD_DOC=OFF",
+                    "-DBUILD_TESTING=OFF","-DEIGEN_BUILD_TESTING=OFF","-DEIGEN_BUILD_DOC=OFF",
+                    "-DEIGEN_BUILD_BLAS=OFF","-DEIGEN_BUILD_LAPACK=OFF","-DEIGEN_BUILD_DEMOS=OFF",
                     "-DCMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED=NO"],check=True)
     subprocess.run(["cmake","--build","eigen-build","--config","Release","--target","install"],check=True)
     print("Built eigen",version,"for iOS arm64")
