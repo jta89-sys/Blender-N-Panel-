@@ -100,7 +100,8 @@ jobs:
             blender/lib/ios_arm64/eigen
             blender/lib/ios_arm64/abseil
             blender/lib/ios_arm64/ceres
-          key: ios-added-deps-${{ runner.arch }}-${{ hashFiles('blender/build_files/build_environment/cmake/versions.cmake') }}-v1
+          key: ios-added-deps-${{ runner.arch }}-${{ hashFiles('blender/build_files/build_environment/cmake/versions.cmake') }}-v2-${{ github.run_id }}
+          restore-keys: ios-added-deps-${{ runner.arch }}-${{ hashFiles('blender/build_files/build_environment/cmake/versions.cmake') }}-v2-
 
       - name: Build missing iOS fmt dependency
         run: python3 build_missing_fmt.py
@@ -112,7 +113,7 @@ jobs:
         run: python3 build_missing_ceres.py
 
       - name: Save added dependencies before Blender compilation
-        if: steps.added-deps.outputs.cache-hit != 'true'
+        if: always() && steps.added-deps.outcome == 'success' && steps.added-deps.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
           path: |
