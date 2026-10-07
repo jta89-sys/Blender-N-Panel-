@@ -1,0 +1,101 @@
+== RUN 37656982129 attempt 1 on 15.7.9 / Xcode 16.4 Build version 16F6  ==
+
+===== update.log (tail) =====
+
+===== configure.log (tail) =====
+-- The C compiler identification is AppleClang 17.0.0.17000013
+-- The CXX compiler identification is AppleClang 17.0.0.17000013
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Building for cross-compilation platform target: ios, CMAKE_SYSTEM_NAME:iOS
+-- Looking for malloc_stats
+-- Looking for malloc_stats - not found
+-- Looking for include file execinfo.h
+-- Looking for include file execinfo.h - found
+-- --- APPLE CROSS PLATFORM BUILD -----
+-- Detected iPhoneOS 18.5 and Xcode 16.4 at /Applications/Xcode_16.4.app/Contents/Developer
+-- iPhoneOS Platform DIR /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneOS.platform
+-- SDKs Directory: /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs
+-- Detected CMAKE_OSX_SYSROOT: /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.5.sdk
+-- Detected CMAKE_APPLE_CROSSPLATFORM_SDK_ROOT: /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs
+-- Detected CMAKE_SYSTEM_FRAMEWORK_PATH: /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneOS.platform/System/Library/Frameworks;/Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneOS.platform/System/Library/PrivateFrameworks;/Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Frameworks
+-- Detected MACOS X 15.5 and Xcode 16.4 at /Applications/Xcode_16.4.app/Contents/Developer
+-- Detected MACOSX_SYSROOT: /Applications/Xcode_16.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk
+-- Found Git: /opt/homebrew/bin/git (found version "2.55.0")
+--  
+---------------------------
+ CROSS COMPILE TOOLS:
+
+Detect CMake configuration for host-tools-build (datatoc, datatoc_icon, makesdna, makesrna, msgformat, shader_tool) 
+
+Inheriting CMAKE_ARGS:
+ -DCMAKE_SKIP_INSTALL_RPATH=NO -DCMAKE_SKIP_RPATH=NO -DCMAKE_VERBOSE_MAKEFILE=FALSE -DIDE_GROUP_PROJECTS_IN_FOLDERS=ON -DIDE_GROUP_SOURCES_IN_FOLDERS=ON -DLLVM_STATIC=OFF -DWITH_ALEMBIC=ON -DWITH_APPLE_CROSSPLATFORM=ON -DWITH_ASSERT_ABORT=ON -DWITH_ASSERT_RELEASE=OFF -DWITH_AUDASPACE=OFF -DWITH_BLENDER=ON -DWITH_BLENDER_THUMBNAILER=OFF -DWITH_BUILDINFO=ON -DWITH_BULLET=ON -DWITH_CLANG=OFF -DWITH_CLANG_TIDY=OFF -DWITH_CODEC_FFMPEG=ON -DWITH_CODEC_SNDFILE=ON -DWITH_COMPILER_ASAN=OFF -DWITH_COMPILER_ASAN_EXTERN=OFF -DWITH_COMPILER_CCACHE=OFF -DWITH_COMPILER_CODE_COVERAGE=OFF -DWITH_COMPILER_PRECOMPILED_HEADERS=ON -DWITH_COMPILER_SHORT_FILE_MACRO=ON -DWITH_COMPILER_SIMD=ON -DWITH_COREAUDIO=ON -DWITH_CROSSCOMPILED_TOOLS=OFF -DWITH_CYCLES=ON -DWITH_CYCLES_DEBUG=OFF -DWITH_CYCLES_DEBUG_NAN=OFF -DWITH_CYCLES_DEVICE_METAL=ON -DWITH_CYCLES_EMBREE=ON -DWITH_CYCLES_HYDRA_RENDER_DELEGATE=OFF -DWITH_CYCLES_KERNEL_ASAN=OFF -DWITH_CYCLES_NATIVE_ONLY=OFF -DWITH_CYCLES_OSL=OFF -DWITH_CYCLES_PARALLEL_DEVICE_KERNEL_BUILD=OFF -DWITH_CYCLES_PATH_GUIDING=ON -DWITH_CYCLES_PRECOMPUTE=OFF -DWITH_CYCLES_STANDALONE=OFF -DWITH_CYCLES_STANDALONE_GUI=OFF -DWITH_CYCLES_TEST_OSL=OFF -DWITH_DRACO=ON -DWITH_DRAW_DEBUG=OFF -DWITH_EXPERIMENTAL_FEATURES=OFF -DWITH_FFTW3=ON -DWITH_FREESTYLE=ON -DWITH_FRIBIDI=OFF -DWITH_GHOST_DEBUG=OFF -DWITH_GHOST_SDL=OFF -DWITH_GMP=ON -DWITH_GPU_BACKEND_TESTS=OFF -DWITH_GPU_COMPOSITOR_TESTS=OFF -DWITH_GPU_DRAW_TESTS=OFF -DWITH_GPU_MESH_PAINT_TESTS=OFF -DWITH_GPU_RENDER_TESTS=OFF -DWITH_GPU_RENDER_TESTS_HEADED=OFF -DWITH_GPU_RENDER_TESTS_VULKAN=OFF -DWITH_GPU_SHADER_ASSERT=OFF -DWITH_GPU_SHADER_CPP_COMPILATION=OFF -DWITH_GTESTS=OFF -DWITH_HARFBUZZ=OFF -DWITH_HARU=ON -DWITH_HEADLESS=OFF -DWITH_HYDRA=OFF -DWITH_IK_ITASC=ON -DWITH_IK_SOLVER=ON -DWITH_IMAGE_CINEON=ON -DWITH_IMAGE_OPENEXR=ON -DWITH_IMAGE_OPENJPEG=ON -DWITH_IMAGE_WEBP=ON -DWITH_INPUT_IME=ON -DWITH_INPUT_NDOF=OFF -DWITH_INSTALL_COPYRIGHT=OFF -DWITH_INTERNATIONAL=ON -DWITH_IO_FBX=ON -DWITH_IO_GREASE_PENCIL=ON -DWITH_IO_PLY=ON -DWITH_IO_STL=ON -DWITH_IO_WAVEFRONT_OBJ=ON -DWITH_JACK=OFF -DWITH_JACK_DYNLOAD=OFF -DWITH_LEGACY_MACOS_X64_LINKER=OFF -DWITH_LIBMV=ON -DWITH_LIBMV_SCHUR_SPECIALIZATIONS=ON -DWITH_LLVM=OFF -DWITH_MANIFOLD=ON -DWITH_MATERIALX=ON -DWITH_MEM_VALGRIND=OFF -DWITH_METAL_BACKEND=ON -DWITH_MOD_FLUID=ON -DWITH_MOD_OCEANSIM=ON -DWITH_MOD_REMESH=ON -DWITH_NANOVDB=ON -DWITH_OPENAL=ON -DWITH_OPENCOLORIO=ON -DWITH_OPENGL_BACKEND=OFF -DWITH_OPENIMAGEDENOISE=ON -DWITH_OPENSUBDIV=ON -DWITH_OPENVDB=ON -DWITH_OPENVDB_3_ABI_COMPATIBLE=OFF -DWITH_OPENVDB_BLOSC=ON -DWITH_OPTIMIZED_BUILD_TOOLS=ON -DWITH_POTRACE=ON -DWITH_PUGIXML=ON -DWITH_PYTHON=ON -DWITH_PYTHON_INSTALL=ON -DWITH_PYTHON_INSTALL_NUMPY=ON -DWITH_PYTHON_INSTALL_ZSTANDARD=OFF -DWITH_PYTHON_MODULE=OFF -DWITH_PYTHON_NUMPY=ON -DWITH_PYTHON_SAFETY=OFF -DWITH_PYTHON_SECURITY=ON -DWITH_QUADRIFLOW=ON -DWITH_RENDERDOC=OFF -DWITH_RUBBERBAND=ON -DWITH_SDL=OFF -DWITH_STORM_TESTS_VULKAN=OFF -DWITH_STRICT_BUILD_OPTIONS=OFF -DWITH_STRSIZE_DEBUG=OFF -DWITH_SYSTEM_AUDASPACE=OFF -DWITH_SYSTEM_BULLET=OFF -DWITH_SYSTEM_GFLAGS=OFF -DWITH_SYSTEM_GLOG=OFF -DWITH_SYSTEM_PYTHON_TESTS=OFF -DWITH_TBB=ON -DWITH_TESTS_BATCHED=ON -DWITH_TESTS_EXPERIMENTAL=OFF -DWITH_TESTS_SINGLE_BINARY=ON -DWITH_UI_TESTS=OFF -DWITH_UI_TESTS_VULKAN=OFF -DWITH_UNITY_BUILD=ON -DWITH_USD=OFF -DWITH_UV_SLIM=ON -DWITH_VULKAN_BACKEND=OFF -DWITH_XR_OPENXR=OFF
+
+-- Host tools will be generated in: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/../build_ios/build_darwin_tools/Release
+-- makesdna: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/../build_ios/build_darwin_tools/Release/bin/makesdna
+-- makesrna: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/../build_ios/build_darwin_tools/Release/bin/makesrna
+-- msgfmt: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/../build_ios/build_darwin_tools/Release/bin/msgfmt
+-- datatoc: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/../build_ios/build_darwin_tools/Release/bin/datatoc
+-- shader_tool: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/../build_ios/build_darwin_tools/Release/bin/shader_tool
+-- 
+---------------------------
+
+-- Using pre-compiled LIBDIR: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64
+-- Searching pre-compiled LIBDIR: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64
+-- HOST PYTHON EXECUTABLE: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/macos_arm64/python/bin/python3.13
+-- Found ZLIB: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/zlib/lib/libz.dylib (found version "1.3.1")
+-- Found Alembic: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/alembic/lib/libAlembic.a
+-- Found OpenSubdiv: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/opensubdiv/lib/libosdGPU.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/opensubdiv/lib/libosdCPU.a
+-- Found SndFile: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/sndfile/lib/libsndfile.a
+-- Found SndFile libraries: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/sndfile/lib/libsndfile.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/sndfile/lib/libFLAC.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libogg.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libvorbis.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libvorbisenc.a
+-- Found PythonLibsUnix: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/python/lib/libpython3.11.a
+-- Found Fftw3: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/fftw3/lib/libfftw3f.a
+-- Found Freetype: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/freetype/lib/libfreetype.a (found version "2.13.0")
+-- #define OPENEXR_VERSION_STRING "3.3.2"
+-- Found OpenEXR: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openexr/lib/libIex.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openexr/lib/libOpenEXR.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openexr/lib/libOpenEXRCore.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openexr/lib/libIlmThread.dylib;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/imath/lib/libImath.dylib
+CMake Warning at build_files/cmake/Modules/FindFFmpeg.cmake:66 (message):
+  Could NOT find FFmpeg AVFILTER.
+Call Stack (most recent call first):
+  build_files/cmake/platform/platform_apple.cmake:367 (find_package)
+  CMakeLists.txt:1631 (include)
+
+
+-- Found FFmpeg: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libavcodec.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libavdevice.a;FFMPEG_AVFILTER_LIBRARY-NOTFOUND;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libavformat.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libavutil.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libmp3lame.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libogg.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libopus.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libswresample.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libswscale.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libtheora.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libtheoradec.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libtheoraenc.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libvorbis.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libvorbisenc.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libvorbisfile.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libvpx.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libx264.a;/Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/ffmpeg/lib/libaom.a
+-- Found OpenJPEG: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/openjpeg/lib/libopenjp2.a
+-- Found PNG: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/png/lib/libpng.a (found version "1.6.43")
+-- Found JPEG: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/jpeg/lib/libjpeg.a (found version "80")
+-- Found TIFF: /Users/runner/work/Blender-N-Panel-/Blender-N-Panel-/blender/lib/ios_arm64/tiff/lib/libtiff.a (found version "4.7.0")
+CMake Error at build_files/cmake/platform/platform_apple.cmake:441 (find_package):
+  By not providing "Findfmt.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "fmt", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "fmt" with any of
+  the following names:
+
+    fmt.cps
+    fmtConfig.cmake
+    fmt-config.cmake
+
+  Add the installation prefix of "fmt" to CMAKE_PREFIX_PATH or set "fmt_DIR"
+  to a directory containing one of the above files.  If "fmt" provides a
+  separate development package or SDK, be sure it has been installed.
+Call Stack (most recent call first):
+  CMakeLists.txt:1631 (include)
+
+
+-- Configuring incomplete, errors occurred!
+
+===== build.log error lines =====
+
+===== build.log (tail) =====
+
+===== CMakeError.log (tail) =====
