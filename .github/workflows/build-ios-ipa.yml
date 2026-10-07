@@ -148,7 +148,7 @@ jobs:
       - name: Compile Python compatibility target first
         run: |
           set -o pipefail
-          cmake --build build_ios --config Release --target bf_python_mathutils -- -quiet -jobs "$(sysctl -n hw.logicalcpu)" 2>&1 | tee build.log
+          cmake --build build_ios --config Release --target bf_python_ext bf_python_mathutils -- -quiet -jobs "$(sysctl -n hw.logicalcpu)" 2>&1 | tee build.log
 
       - name: Build and assemble Blender.app
         run: |
