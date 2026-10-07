@@ -1,0 +1,11 @@
+== RUN 37660501625 attempt 1 on 15.7.9 / Xcode 16.4 Build version 16F6  ==
+
+===== update.log (tail) =====
+
+===== configure.log (tail) =====
+
+===== build.log error lines =====
+
+===== build.log (tail) =====
+
+===== CMakeError.log (tail) =====
