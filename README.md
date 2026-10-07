@@ -22,8 +22,12 @@ a Blender-ios-ipa artifact and a release only after compilation and validation s
 ## Dependency compatibility
 The current ios source expects newer dependencies than its precompiled iOS bundle.
 The workflow selects the bundled Python 3.11 target SDK separately from the macOS
-host interpreter, restores OpenEXR discovery and builds missing fmt for iOS arm64
-from the version and SHA256 in Blender's dependency manifest. Native compilation
+host interpreter, restores OpenEXR, OpenImageIO and OpenColorIO discovery and builds missing fmt,
+Eigen, Abseil and Ceres for iOS arm64
+from the versions and SHA256 checksums in Blender's dependency manifest.
+Added dependencies are cached by manifest content. Optional Eigen BLAS/LAPACK,
+demos and tests are excluded. Rubberband is disabled because the iOS port already
+disables its parent Audaspace audio system. Native compilation
 and device behavior remain unverified until a complete build and iPad test pass.
 
 ## Validation and limits
