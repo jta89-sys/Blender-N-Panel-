@@ -145,10 +145,15 @@ jobs:
             -DCMAKE_XCODE_ATTRIBUTE_DEVELOPMENT_TEAM="" \
             -DCMAKE_BUILD_TYPE=Release 2>&1 | tee configure.log
 
+      - name: Compile Python compatibility target first
+        run: |
+          set -o pipefail
+          cmake --build build_ios --config Release --target bf_python_mathutils -- -quiet -jobs "$(sysctl -n hw.logicalcpu)" 2>&1 | tee build.log
+
       - name: Build and assemble Blender.app
         run: |
           set -o pipefail
-          cmake --build build_ios --config Release --target install -- -quiet -jobs "$(sysctl -n hw.logicalcpu)" 2>&1 | tee build.log
+          cmake --build build_ios --config Release --target install -- -quiet -jobs "$(sysctl -n hw.logicalcpu)" 2>&1 | tee -a build.log
 
       - name: Add Blender app icon (non-fatal)
         continue-on-error: true
