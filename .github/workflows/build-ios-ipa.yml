@@ -76,6 +76,7 @@ jobs:
           key: blender-ios-libs-${{ runner.arch }}-${{ hashFiles('dependency-revisions.txt') }}-v3
 
       - name: Fetch assets + precompiled libraries (iOS + macOS host tools)
+        if: steps.deps.outputs.cache-hit != 'true'
         working-directory: blender
         run: |
           set -o pipefail
