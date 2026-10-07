@@ -19,5 +19,17 @@ s=s.replace("set(PYTHON_VERSION 3.13)",f"set(PYTHON_VERSION {version})")
 s=s.replace('set(PYTHON_EXECUTABLE "${CROSSCOMPILE_HOST_LIBDIR}/python/bin/python3.13")',f'set(PYTHON_EXECUTABLE "{host}")')
 s=s.replace('set(PYTHON_EXECUTABLE "${CROSSCOMPILE_HOST_LIBDIR}/python/bin/python${PYTHON_VERSION}")',f'set(PYTHON_EXECUTABLE "{host}")')
 s=s.replace("WARNING Manually defining Python Version to 3.13 for iOS build",f"iOS Python SDK: {version}; macOS host interpreter selected separately")
+
+# FindPythonLibsUnix writes a cache default; provide complete target SDK cache values.
+sdk_cache = (
+    f'set(PYTHON_VERSION {version} CACHE STRING "iOS Python SDK version" FORCE)\n'
+    f'set(PYTHON_LIBRARY "{(ios/"lib"/("libpython"+version+".a")).resolve()}" CACHE FILEPATH "" FORCE)\n'
+    f'set(PYTHON_INCLUDE_DIR "{(ios/"include"/("python"+version)).resolve()}" CACHE PATH "" FORCE)\n'
+    f'set(PYTHON_INCLUDE_CONFIG_DIR "{(ios/"include"/("python"+version)).resolve()}" CACHE PATH "" FORCE)\n'
+)
+anchor = '  set(CROSSCOMPILE_HOST_LIBDIR "${CMAKE_SOURCE_DIR}/lib/macos_arm64")\n'
+assert s.count(anchor)==1
+s=s.replace(anchor,anchor+sdk_cache)
+
 p.write_text(s)
 print("Configured target Python",version,"host",host)
