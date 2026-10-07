@@ -3,7 +3,7 @@
 # - On failure: commits a condensed error log to ci-logs/ in this repo,
 #   so the build can be debugged remotely via the GitHub API.
 
-name: Build Blender iOS IPA - M1 Revision
+name: Build Blender iOS IPA - Fast M1 Revision
 
 on:
   workflow_dispatch:
@@ -24,11 +24,13 @@ jobs:
       - name: Clone Blender ios branch from blender.org WITH Git LFS (real datafiles)
         run: |
           git lfs install
-          git clone --depth 1 --branch ios https://projects.blender.org/blender/blender.git blender
-          cd blender && git lfs pull
-          test "$(wc -c < release/datafiles/startup.blend)" -gt 100000
-          git rev-parse HEAD > ../blender-source-commit.txt
-          echo "startup.blend bytes: $(wc -c < release/datafiles/startup.blend) (must be >100000, not 131)"
+          GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 --branch ios https://projects.blender.org/blender/blender.git blender
+          git -C blender rev-parse HEAD > blender-source-commit.txt
+
+      - name: "Patch sources build-20 (cursor revert to build-17 + robust logged back button)"
+        run: |
+          python3 source_patch.py
+          python3 bottom_npanel_patch.py
 
       - name: Toolchain info
         run: |
@@ -39,13 +41,39 @@ jobs:
           python3 --version
           git lfs install
 
-      - name: Cache precompiled dependency libraries
-        uses: actions/cache@v4
+      - name: Restore source LFS objects
+        id: source-lfs
+        uses: actions/cache/restore@v4
+        with:
+          path: blender/.git/lfs/objects
+          key: source-lfs-${{ runner.arch }}-${{ hashFiles('blender-source-commit.txt') }}
+          restore-keys: source-lfs-${{ runner.arch }}-
+
+      - name: Fetch runtime assets (exclude test and benchmark data)
+        working-directory: blender
+        run: |
+          git lfs pull --exclude="tests/**"
+          test "$(wc -c < release/datafiles/startup.blend)" -gt 100000
+
+      - name: Save source asset cache immediately
+        if: steps.source-lfs.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: blender/.git/lfs/objects
+          key: ${{ steps.source-lfs.outputs.cache-primary-key }}
+
+      - name: Identify exact dependency revisions
+        run: |
+          git -C blender ls-tree HEAD lib/ios_arm64 lib/macos_arm64 > dependency-revisions.txt
+
+      - name: Restore precompiled dependency libraries
+        id: deps
+        uses: actions/cache/restore@v4
         with:
           path: |
             blender/lib/ios_arm64
             blender/lib/macos_arm64
-          key: blender-ios-libs-${{ runner.arch }}-v2
+          key: blender-ios-libs-${{ runner.arch }}-${{ hashFiles('dependency-revisions.txt') }}-v3
 
       - name: Fetch assets + precompiled libraries (iOS + macOS host tools)
         working-directory: blender
@@ -53,10 +81,14 @@ jobs:
           set -o pipefail
           python3 ./build_files/utils/make_update.py --no-blender --use-ios-libraries 2>&1 | tee update.log
 
-      - name: "Patch sources build-20 (cursor revert to build-17 + robust logged back button)"
-        run: |
-          python3 source_patch.py
-          python3 bottom_npanel_patch.py
+      - name: Save dependencies before compilation
+        if: steps.deps.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            blender/lib/ios_arm64
+            blender/lib/macos_arm64
+          key: ${{ steps.deps.outputs.cache-primary-key }}
 
       - name: Configure (CMake, Xcode generator, iOS device target)
         run: |
@@ -72,7 +104,7 @@ jobs:
       - name: Build and assemble Blender.app
         run: |
           set -o pipefail
-          cmake --build build_ios --config Release --target install -- -quiet -jobs 3 2>&1 | tee build.log
+          cmake --build build_ios --config Release --target install -- -quiet -jobs "$(sysctl -n hw.logicalcpu)" 2>&1 | tee build.log
 
       - name: Add Blender app icon (non-fatal)
         continue-on-error: true
@@ -141,7 +173,7 @@ jobs:
           # fail with "os error 1314 / A required privilege is not held".
           find Payload -type l ! -exec test -e {} \; -delete || true
           echo "Symlinks left in Payload: $(find Payload -type l | wc -l | tr -d ' ')"
-          zip -qr Blender-ios.ipa Payload
+          zip -1qr Blender-ios.ipa Payload
           unzip -tq Blender-ios.ipa
           shasum -a 256 Blender-ios.ipa > Blender-ios.ipa.sha256
           ls -lh Blender-ios.ipa
@@ -150,6 +182,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Blender-ios-ipa
+          compression-level: 0
           path: |
             Blender-ios.ipa
             Blender-ios.ipa.sha256
