@@ -1,0 +1,69 @@
+
+FILE oiioversion.h
+#define OIIO_VERSION_MAJOR 3
+#define OIIO_VERSION_MINOR 0
+#define OIIO_VERSION_PATCH 6
+#define OIIO_VERSION_TWEAK 1
+#define OIIO_VERSION_RELEASE_TYPE 
+//     #if OIIO_VERSION >= OIIO_MAKE_VERSION(2,3,0)
+#define OIIO_VERSION OIIO_MAKE_VERSION(OIIO_VERSION_MAJOR, \
+                        OIIO_VERSION_MINOR, OIIO_VERSION_PATCH)
+#define OIIO_VERSION_GREATER_EQUAL(major,minor,patch) \
+                        OIIO_VERSION >= OIIO_MAKE_VERSION(major,minor,patch)
+#define OIIO_VERSION_LESS(major,minor,patch) \
+                        OIIO_VERSION < OIIO_MAKE_VERSION(major,minor,patch)
+#define OPENIMAGEIO_VERSION OIIO_VERSION
+// Magic macros to make OIIO_VERSION_STRING that looks like "1.2.3.0"
+#define OIIO_VERSION_STRING \
+    OIIO_MAKE_VERSION_STRING(OIIO_VERSION_MAJOR, \
+                             OIIO_VERSION_MINOR, OIIO_VERSION_PATCH, \
+                             OIIO_VERSION_TWEAK, OIIO_VERSION_RELEASE_TYPE)
+#define OIIO_INTRO_STRING "OpenImageIO " OIIO_VERSION_STRING " http://www.openimageio.org"
+#define OIIO_VERSION_STRING_MMPT \
+    OIIO_MAKE_VERSION_STRING(OIIO_VERSION_MAJOR, \
+                             OIIO_VERSION_MINOR, OIIO_VERSION_PATCH, \
+                             OIIO_VERSION_TWEAK, "")
+
+FILE detail/fmt.h
+#include <OpenImageIO/dassert.h>
+#include <OpenImageIO/platform.h>
+#include <OpenImageIO/type_traits.h>
+#include <OpenImageIO/detail/fmt/format.h>
+#include <OpenImageIO/detail/fmt/ostream.h>
+#include <OpenImageIO/detail/fmt/printf.h>
+#if FMT_VERSION >= 90000
+#if FMT_VERSION >= 80000
+#if FMT_VERSION >= 80000
+
+FILE detail/fmt/core.h
+#include <cstddef>  // std::byte
+#include <cstdio>   // std::FILE
+#include <cstring>  // std::strlen
+#include <iterator>
+#include <limits>
+#include <string>
+#include <type_traits>
+#define FMT_VERSION 90100
+#ifndef FMT_BEGIN_NAMESPACE
+#  define FMT_BEGIN_NAMESPACE \
+#  define FMT_END_NAMESPACE \
+FMT_BEGIN_NAMESPACE
+    #include <fmt/core.h>
+FMT_END_NAMESPACE
+
+FILE detail/fmt/format.h
+#include <cmath>         // std::signbit
+#include <cstdint>       // uint32_t
+#include <cstring>       // std::memcpy
+#include <limits>        // std::numeric_limits
+#include <memory>        // std::uninitialized_copy
+#include <stdexcept>     // std::runtime_error
+#include <system_error>  // std::system_error
+#include "core.h"
+FMT_BEGIN_NAMESPACE
+FMT_END_NAMESPACE
+FMT_BEGIN_NAMESPACE
+FMT_END_NAMESPACE
+FMT_BEGIN_NAMESPACE
+    #include <fmt/format.h>
+FMT_END_NAMESPACE
