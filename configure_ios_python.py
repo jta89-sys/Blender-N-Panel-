@@ -78,6 +78,7 @@ assert hashlib.sha256(data).hexdigest() == compat_hash, "Python C API compatibil
 sdk_include = ios/"include"/("python"+version)
 (sdk_include/"pythoncapi_compat.h").write_bytes(data)
 shim = """#pragma once
+#define BLENDER_IPAD_PYTHON_COMPAT 1
 #include "pythoncapi_compat.h"
 /* Python 3.11 stores the raised exception as type/value/traceback. */
 #if PY_VERSION_HEX < 0x030C0000
@@ -116,3 +117,11 @@ include = '#include "blender_ipad_python_compat.h"'
 if include not in source:
     python_header.write_text(source + "\n" + include + "\n")
 print("Installed pinned Python C API compatibility in iOS target SDK")
+
+# Permit the older target only when the audited compatibility layer is present.
+intern_header = root/"source/blender/python/intern/bpy_capi_utils.hh"
+source = intern_header.read_text()
+anchor = "#if PY_VERSION_HEX < 0x030d0000"
+assert source.count(anchor) == 1, "Python minimum-version guard changed"
+intern_header.write_text(source.replace(anchor,
+    "#if PY_VERSION_HEX < 0x030d0000 && !defined(BLENDER_IPAD_PYTHON_COMPAT)"))
