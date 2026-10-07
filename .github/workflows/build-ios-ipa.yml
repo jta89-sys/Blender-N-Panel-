@@ -109,6 +109,7 @@ jobs:
           set -o pipefail
           cmake -S blender -B build_ios -G Xcode \
             -DAPPLE_TARGET_DEVICE=ios \
+            -DWITH_RUBBERBAND=OFF \
             -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED=NO \
             -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED=NO \
             -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY="" \
