@@ -12,7 +12,10 @@ recipes=[
     ("ABSEIL","abseil",["-DABSL_BUILD_TESTING=OFF","-DABSL_ENABLE_INSTALL=ON","-DABSL_PROPAGATE_CXX_STD=ON"]),
     ("CERES","ceres",["-DBUILD_TESTING=OFF","-DBUILD_EXAMPLES=OFF","-DBUILD_BENCHMARKS=OFF",
                       "-DSUITESPARSE=OFF","-DLAPACK=OFF","-DACCELERATESPARSE=OFF","-DUSE_CUDA=OFF",
-                      "-DCMAKE_PREFIX_PATH="+str(sdk/"abseil")+";"+str(sdk/"eigen")]),
+                      "-DCMAKE_PREFIX_PATH="+str(sdk/"abseil")+";"+str(sdk/"eigen"),
+                      "-Dabsl_DIR="+str(sdk/"abseil/lib/cmake/absl"),
+                      "-DEigen3_DIR="+str(sdk/"eigen/share/eigen3/cmake"),
+                      "-DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=NEVER"]),
 ]
 for name,folder,args in recipes:
     prefix=sdk/folder
