@@ -1,0 +1,45 @@
+name: Inspect iOS formatting SDK
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/inspect-ios-sdk.yml'
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Clone source and identify libraries
+        run: |
+          GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 --branch ios https://projects.blender.org/blender/blender.git blender
+          git -C blender ls-tree HEAD lib/ios_arm64 lib/macos_arm64 > dependency-revisions.txt
+      - uses: actions/cache/restore@v4
+        id: deps
+        with:
+          path: |
+            blender/lib/ios_arm64
+            blender/lib/macos_arm64
+          key: blender-ios-libs-${{ runner.arch }}-${{ hashFiles('dependency-revisions.txt') }}-v3
+      - name: Inspect exact SDK headers
+        run: |
+          python3 - <<'PY' > sdk-report.txt
+          from pathlib import Path
+          root=Path("blender/lib/ios_arm64/openimageio/include/OpenImageIO")
+          assert root.is_dir(), "Dependency cache missing"
+          for name in ("oiioversion.h", "detail/fmt.h", "detail/fmt/core.h", "detail/fmt/base.h", "detail/fmt/format.h"):
+              p=root/name
+              if p.is_file():
+                  print("\nFILE",name)
+                  for line in p.read_text().splitlines():
+                      if any(x in line for x in ("FMT_VERSION", "#include", "OIIO_VERSION", "FMT_BEGIN_NAMESPACE", "FMT_END_NAMESPACE")):
+                          print(line)
+          PY
+          cat sdk-report.txt
+      - name: Save inspection report
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api -X PUT "repos/${{ github.repository }}/contents/ci-logs/sdk-${{ github.run_id }}.txt" -f message="Inspect installed iOS SDK formatting ABI" -f content="$(base64 -i sdk-report.txt | tr -d '\n')"
