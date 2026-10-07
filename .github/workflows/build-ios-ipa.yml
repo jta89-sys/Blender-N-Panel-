@@ -7,6 +7,14 @@ name: Build Blender iOS IPA - Fast M1 Revision
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-ios-ipa.yml'
+      - 'configure_ios_fmt.py'
+      - 'configure_ios_python.py'
+      - 'source_patch.py'
+      - 'bottom_npanel_patch.py'
 
 permissions:
   contents: write
@@ -105,6 +113,9 @@ jobs:
 
       - name: Build missing iOS fmt dependency
         run: python3 build_missing_fmt.py
+
+      - name: Unify and validate iOS formatting headers
+        run: python3 configure_ios_fmt.py
 
       - name: Install missing iOS Eigen headers and metadata
         run: python3 build_missing_eigen.py
