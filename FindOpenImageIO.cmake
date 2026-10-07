@@ -102,7 +102,7 @@ find_package_handle_standard_args(OpenImageIO DEFAULT_MSG
 
 if(OPENIMAGEIO_FOUND)
   set(OPENIMAGEIO_LIBRARIES ${_openimageio_LIBRARIES})
-  set(OPENIMAGEIO_INCLUDE_DIRS ${OPENIMAGEIO_INCLUDE_DIR})
+  set(OPENIMAGEIO_INCLUDE_DIRS ${OPENIMAGEIO_INCLUDE_DIR} ${fmt_INCLUDE_DIR})
   if(EXISTS ${OPENIMAGEIO_INCLUDE_DIR}/OpenImageIO/pugixml.hpp)
     set(OPENIMAGEIO_PUGIXML_FOUND TRUE)
   else()
@@ -137,4 +137,17 @@ find_program(OPENIMAGEIO_HOST_TOOL NAMES oiiotool HINTS "${CMAKE_SOURCE_DIR}/lib
 if(OPENIMAGEIO_HOST_TOOL AND NOT TARGET OpenImageIO::oiiotool)
   add_executable(OpenImageIO::oiiotool IMPORTED GLOBAL)
   set_target_properties(OpenImageIO::oiiotool PROPERTIES IMPORTED_LOCATION "${OPENIMAGEIO_HOST_TOOL}")
+endif()
+
+# OpenImageIO's public formatting wrappers use the shared external fmt headers.
+if(OPENIMAGEIO_FOUND)
+  if(NOT TARGET fmt::fmt-header-only)
+    message(FATAL_ERROR "iOS OpenImageIO requires the external fmt header target")
+  endif()
+  foreach(_oiio_target OpenImageIO::OpenImageIO OpenImageIO::OpenImageIO_Util)
+    if(TARGET ${_oiio_target})
+      set_property(TARGET ${_oiio_target} APPEND PROPERTY INTERFACE_LINK_LIBRARIES fmt::fmt-header-only)
+    endif()
+  endforeach()
+  unset(_oiio_target)
 endif()
