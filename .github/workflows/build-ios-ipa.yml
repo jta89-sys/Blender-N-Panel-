@@ -94,6 +94,9 @@ jobs:
       - name: Match iOS Python SDK to installed dependency libraries
         run: python3 configure_ios_python.py
 
+      - name: Install iOS OpenEXR finder
+        run: cp FindOpenEXR.cmake blender/build_files/cmake/Modules/FindOpenEXR.cmake
+
       - name: Configure (CMake, Xcode generator, iOS device target)
         run: |
           set -o pipefail
