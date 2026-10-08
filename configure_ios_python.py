@@ -162,3 +162,74 @@ source, count = re.subn(r"(?m)^(    OK_OP\(([A-Z_0-9]+)\).*)$",
 assert count > 60, "Unexpected driver opcode whitelist"
 driver.write_text(source)
 print("Matched driver safety whitelist to target Python opcodes")
+
+# The prebuilt Python 3.11 archive contains _blake2 wrappers but omits the
+# portable BLAKE2 implementations. Supply CPython's matching 3.11 reference
+# implementations instead of disabling hashlib or replacing its algorithms.
+if version == "3.11":
+    import subprocess
+    from urllib.request import urlopen
+
+    archive = ios/"lib"/("libpython"+version+".a")
+    required = {
+        "_blake2b_final", "_blake2b_init_param", "_blake2b_update",
+        "_blake2s_final", "_blake2s_init_param", "_blake2s_update",
+    }
+
+    def defined_symbols():
+        output = subprocess.check_output(
+            ["xcrun", "nm", "-g", "-U", str(archive)], text=True)
+        return {line.split()[-1] for line in output.splitlines()
+                if line.split() and not line.rstrip().endswith(":")}
+
+    present = required & defined_symbols()
+    if present != required:
+        assert not present, f"Partial BLAKE2 implementation in Python SDK: {present}"
+        work = Path("build_python_blake2")
+        work.mkdir(exist_ok=True)
+        # CPython v3.11.9, pinned to its immutable source commit.
+        commit = "de54cf5be371a6f5e2e9f208c38def5f81d3ef02"
+        base = f"https://raw.githubusercontent.com/python/cpython/{commit}/Modules/_blake2/impl/"
+        for name in ("blake2.h", "blake2-impl.h", "blake2b-ref.c", "blake2s-ref.c"):
+            with urlopen(base + name, timeout=60) as response:
+                (work/name).write_bytes(response.read())
+        # Verify both reference implementations against the host hashlib.
+        import hashlib
+        probe = work/"probe.c"
+        probe.write_text(
+            '#include "blake2.h"\n#include <stdio.h>\n#include <string.h>\n'
+            'int main(void) { unsigned char out[64]; '
+            'const char *inputs[] = {"", "abc"}; '
+            'for (int n=0; n<2; ++n) { '
+            'if(blake2b(out,inputs[n],NULL,64,strlen(inputs[n]),0)) return 1; '
+            'for(int i=0;i<64;++i) printf("%02x",out[i]); puts(""); '
+            'if(blake2s(out,inputs[n],NULL,32,strlen(inputs[n]),0)) return 1; '
+            'for(int i=0;i<32;++i) printf("%02x",out[i]); puts(""); } return 0; }\n')
+        executable = (work/"probe").resolve()
+        subprocess.run([
+            "xcrun", "--sdk", "macosx", "clang", "-O2", "-std=c99",
+            str(probe), str(work/"blake2b-ref.c"), str(work/"blake2s-ref.c"),
+            "-o", str(executable),
+        ], check=True)
+        actual = subprocess.check_output([str(executable)], text=True).splitlines()
+        expected = [digest(data).hexdigest() for data in (b"", b"abc")
+                    for digest in (hashlib.blake2b, hashlib.blake2s)]
+        assert actual == expected, "BLAKE2 reference digest verification failed"
+        sdk = subprocess.check_output(
+            ["xcrun", "--sdk", "iphoneos", "--show-sdk-path"], text=True).strip()
+        objects = []
+        for name in ("blake2b-ref", "blake2s-ref"):
+            obj = work/(name + ".o")
+            subprocess.run([
+                "xcrun", "--sdk", "iphoneos", "clang",
+                "-target", "arm64-apple-ios15.0", "-isysroot", sdk,
+                "-O2", "-std=c99", "-c", str(work/(name + ".c")),
+                "-o", str(obj),
+            ], check=True)
+            objects.append(str(obj))
+        subprocess.run(["xcrun", "ar", "-r", str(archive), *objects], check=True)
+        subprocess.run(["xcrun", "ranlib", str(archive)], check=True)
+        assert required <= defined_symbols(), "Python BLAKE2 symbols still missing"
+        print("Restored six missing Python BLAKE2 symbols for iOS arm64")
+    else:
+        print("Python BLAKE2 symbols already present")
