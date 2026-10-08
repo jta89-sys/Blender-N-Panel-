@@ -11,6 +11,8 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/build-ios-ipa.yml'
+      - 'install_python_fixes.py'
+      - 'validate_app.py'
       - 'configure_ios_fmt.py'
       - 'FindOpenImageIO.cmake'
       - 'configure_ios_python.py'
@@ -172,8 +174,7 @@ jobs:
         continue-on-error: true
         run: |
           set +e
-          APP=$(find build_ios -type d -name "Blender.app" | grep -Ei "iphoneos|Release" | head -1)
-          [ -z "$APP" ] && APP=$(find build_ios -type d -name "Blender.app" | head -1)
+          APP=$(python3 -c 'from validate_app import choose_app; print(choose_app("build_ios"))')
           [ -z "$APP" ] && { echo 'no app bundle; skip icon'; exit 0; }
           python3 -m pip install --quiet --break-system-packages pillow cairosvg 2>/dev/null || pip3 install --quiet pillow cairosvg 2>/dev/null || true
           echo 'IyEvdXNyL2Jpbi9lbnYgcHl0aG9uMwojIE5vbi1mYXRhbDogcmVuZGVyIEJsZW5kZXIgbG9nbyBvbiBjaGFyY29hbCAtPiBhcHAgaWNvbnMgKyBJbmZvLnBsaXN0IGtleXMuCmltcG9ydCBzeXMsIG9zCmFwcCA9IHN5cy5hcmd2WzFdOyBzdmcgPSBzeXMuYXJndlsyXQp0cnk6CiAgICBpbXBvcnQgaW8sIGNhaXJvc3ZnLCBwbGlzdGxpYgogICAgZnJvbSBQSUwgaW1wb3J0IEltYWdlCiAgICBwbmcgPSBjYWlyb3N2Zy5zdmcycG5nKHVybD1zdmcsIG91dHB1dF93aWR0aD03NjAsIG91dHB1dF9oZWlnaHQ9NzYwKQogICAgbG9nbyA9IEltYWdlLm9wZW4oaW8uQnl0ZXNJTyhwbmcpKS5jb252ZXJ0KCJSR0JBIikKICAgIGJnID0gSW1hZ2UubmV3KCJSR0JBIiwgKDEwMjQsIDEwMjQpLCAoMzgsIDM4LCAzOCwgMjU1KSkgICMgQmxlbmRlciBjaGFyY29hbAogICAgYmcucGFzdGUobG9nbywgKCgxMDI0IC0gbG9nby53aWR0aCkvLzIsICgxMDI0IC0gbG9nby5oZWlnaHQpLy8yKSwgbG9nbykKICAgIGljb24gPSBiZy5jb252ZXJ0KCJSR0IiKQogICAgc2l6ZXMgPSB7IkFwcEljb242MHg2MEAyeC5wbmciOjEyMCwgIkFwcEljb243Nng3NkAyeH5pcGFkLnBuZyI6MTUyLAogICAgICAgICAgICAgIkFwcEljb244My41eDgzLjVAMnh+aXBhZC5wbmciOjE2NywgIkFwcEljb24xMDI0eDEwMjQucG5nIjoxMDI0fQogICAgZm9yIG5hbWUsIHB4IGluIHNpemVzLml0ZW1zKCk6CiAgICAgICAgaWNvbi5yZXNpemUoKHB4LCBweCksIEltYWdlLkxBTkNaT1MpLnNhdmUob3MucGF0aC5qb2luKGFwcCwgbmFtZSkpCiAgICBwbGlzdF9wYXRoID0gb3MucGF0aC5qb2luKGFwcCwgIkluZm8ucGxpc3QiKQogICAgd2l0aCBvcGVuKHBsaXN0X3BhdGgsICJyYiIpIGFzIGY6CiAgICAgICAgcGwgPSBwbGlzdGxpYi5sb2FkKGYpCiAgICBwcmltID0geyJDRkJ1bmRsZVByaW1hcnlJY29uIjogeyJDRkJ1bmRsZUljb25GaWxlcyI6IFsiQXBwSWNvbjYweDYwIl19fQogICAgcHJpbV9pcGFkID0geyJDRkJ1bmRsZVByaW1hcnlJY29uIjogeyJDRkJ1bmRsZUljb25GaWxlcyI6IFsiQXBwSWNvbjc2eDc2IiwgIkFwcEljb244My41eDgzLjUiXX19CiAgICBwbFsiQ0ZCdW5kbGVJY29ucyJdID0gcHJpbQogICAgcGxbIkNGQnVuZGxlSWNvbnN+aXBhZCJdID0gcHJpbV9pcGFkCiAgICB3aXRoIG9wZW4ocGxpc3RfcGF0aCwgIndiIikgYXMgZjoKICAgICAgICBwbGlzdGxpYi5kdW1wKHBsLCBmLCBmbXQ9cGxpc3RsaWIuRk1UX0JJTkFSWSkKICAgIHByaW50KCJpY29uOiBpbnN0YWxsZWQgQXBwSWNvbiBzZXQgKyBJbmZvLnBsaXN0IGtleXMiKQpleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICBwcmludCgiaWNvbjogc2tpcHBlZCAoIiwgZSwgIikiKQogICAgc3lzLmV4aXQoMCkK' | base64 -d > /tmp/mkicon.py
@@ -189,8 +190,7 @@ jobs:
       - name: Package IPA
         run: |
           set -x
-          APP=$(find build_ios -type d -name "Blender.app" | grep -Ei "iphoneos|Release" | head -1)
-          if [ -z "$APP" ]; then APP=$(find build_ios -type d -name "Blender.app" | head -1); fi
+          APP=$(python3 -c 'from validate_app import choose_app; print(choose_app("build_ios"))')
           test -n "$APP" || { echo "Blender.app not found"; exit 1; }
           echo "Found app bundle: $APP"
           # Strip non-runtime build artifacts: on-device signers (LiveContainer,
