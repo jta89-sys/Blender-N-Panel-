@@ -1,0 +1,194 @@
+== RUN 37697775129 attempt 2 on 15.7.9 / Xcode 16.4 Build version 16F6  ==
+
+===== update.log (tail) =====
+
+===== configure.log (tail) =====
+-- Performing Test CXX_MACRO_PREFIX_MAP - Success
+-- Configure Ghost for Apple Cross platform: iOS
+-- Performing Test _has_no_error_unused_macros
+-- Performing Test _has_no_error_unused_macros - Success
+-- Performing Test _has_cxxflag_float_conversion
+-- Performing Test _has_cxxflag_float_conversion - Success
+-- Performing Test _has_cxxflag_double_promotion
+-- Performing Test _has_cxxflag_double_promotion - Success
+-- Finding Python Module File: certifi/cacert.pem
+-- Tests: Using Python executable: /Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/macos_arm64/python/bin/python3.13
+-- -- CONFIGURING IOS PLIST -- 
+-- IOS_FIXME: PLATFORM_BUNDLED_LIBRARIES=/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/zlib/lib/libz.1.3.1.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/zlib/lib/libz.1.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/zlib/lib/libz.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/usd/lib/libusd_ms.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/materialx/lib/libMaterialX.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/openexr/lib/libIex.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/openexr/lib/libIlmThread.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/openexr/lib/libOpenEXR.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/openexr/lib/libOpenEXRCore.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/openexr/lib/libOpenEXRUtil.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/imath/lib/libImath.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/openimageio/lib/libOpenImageIO.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/openimageio/lib/libOpenImageIO_Util.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/opencolorio/lib/libOpenColorIO.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/openvdb/lib/libopenvdb.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/osl/lib/liboslcomp.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/osl/lib/liboslexec.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/osl/lib/liboslnoise.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/osl/lib/liboslquery.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/openimagedenoise/lib/libOpenImageDenoise.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/openimagedenoise/lib/libOpenImageDenoise_core.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/openimagedenoise/lib/libOpenImageDenoise_device_cpu.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/tbb/lib/libtbb.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/tbb/lib/libtbbmalloc.dylib;/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/lib/ios_arm64/tbb/lib/libtbbmalloc_proxy.dylib
+-- C Compiler:   "AppleClang"
+-- C++ Compiler: "AppleClang"
+-- 
+Blender Configuration
+=====================
+
+  Build Options:
+  - WITH_ALEMBIC                        ON
+  - WITH_BULLET                         ON
+  - WITH_CLANG                          OFF
+  - WITH_CYCLES                         ON
+  - WITH_FFTW3                          ON
+  - WITH_FREESTYLE                      ON
+  - WITH_GMP                            ON
+  - WITH_HARU                           ON
+  - WITH_IK_ITASC                       ON
+  - WITH_IK_SOLVER                      ON
+  - WITH_INPUT_NDOF                     OFF
+  - WITH_INPUT_IME                      ON
+  - WITH_INTERNATIONAL                  ON
+  - WITH_MANIFOLD                       ON
+  - WITH_OPENCOLORIO                    ON
+  - WITH_OPENIMAGEDENOISE               ON
+  - WITH_OPENSUBDIV                     ON
+  - WITH_OPENVDB                        ON
+  - WITH_POTRACE                        ON
+  - WITH_PUGIXML                        ON
+  - WITH_QUADRIFLOW                     ON
+  - WITH_TBB                            ON
+  - WITH_USD                            OFF
+  - WITH_MATERIALX                      ON
+  - WITH_XR_OPENXR                      OFF
+
+  Compiler Options:
+  - WITH_BUILDINFO                      ON
+  - WITH_OPTIMIZED_BUILD_TOOLS          ON
+
+  System Options:
+  - WITH_INSTALL_PORTABLE               
+  - WITH_TBB_MALLOC_PROXY               
+  - WITH_MEM_VALGRIND                   OFF
+
+  GHOST Options:
+  - WITH_GHOST_DEBUG                    OFF
+  - WITH_GHOST_SDL                      OFF
+
+  Image Formats:
+  - WITH_IMAGE_CINEON                   ON
+  - WITH_IMAGE_OPENEXR                  ON
+  - WITH_IMAGE_OPENJPEG                 ON
+
+  Audio:
+  - WITH_AUDASPACE                      OFF
+  - WITH_RUBBERBAND                     OFF
+  - WITH_CODEC_FFMPEG                   ON
+  - WITH_CODEC_SNDFILE                  ON
+  - WITH_COREAUDIO                      ON
+  - WITH_JACK                           OFF
+  - WITH_JACK_DYNLOAD                   OFF
+  - WITH_OPENAL                         ON
+  - WITH_PULSEAUDIO                     OFF
+  - WITH_PULSEAUDIO_DYNLOAD             
+  - WITH_SDL                            OFF
+  - WITH_WASAPI                         OFF
+
+  Python:
+  - WITH_PYTHON_INSTALL                 ON
+  - WITH_PYTHON_INSTALL_NUMPY           ON
+  - WITH_PYTHON_INSTALL_ZSTANDARD       OFF
+  - WITH_PYTHON_MODULE                  OFF
+  - WITH_PYTHON_SAFETY                  OFF
+
+  Modifiers:
+  - WITH_MOD_FLUID                      ON
+  - WITH_MOD_OCEANSIM                   ON
+  - WITH_MOD_REMESH                     ON
+
+  Rendering:
+  - WITH_HYDRA                          OFF
+
+  Rendering (Cycles):
+  - WITH_CYCLES_OSL                     OFF
+  - WITH_CYCLES_EMBREE                  ON
+  - WITH_CYCLES_PATH_GUIDING            ON
+
+  Apple Platform Configuration Options:
+  - APPLE_TARGET_DEVICE                 ios
+  - WITH_APPLE_CROSSPLATFORM            ON
+
+  Tests:
+  - WITH_GTESTS                         OFF
+  - CYCLES_TEST_DEVICES                 CPU
+  - WITH_CYCLES_TEST_OSL                OFF
+  - WITH_GPU_RENDER_TESTS               OFF
+  - WITH_GPU_BACKEND_TESTS              OFF
+  - WITH_GPU_DRAW_TESTS                 OFF
+  - WITH_GPU_COMPOSITOR_TESTS           OFF
+  - WITH_GPU_MESH_PAINT_TESTS           OFF
+  - WITH_UI_TESTS                       OFF
+  - WITH_UI_TESTS_HEADLESS              OFF
+  - WITH_UI_TESTS_VULKAN                OFF
+  - WITH_GPU_RENDER_TESTS_VULKAN        OFF
+  - WITH_LINUX_OFFICIAL_RELEASE_TESTS   OFF
+
+  
+-- Configuring done (154.3s)
+-- Generating done (9.0s)
+-- Build files have been written to: /Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/build_ios
+
+===== build.log error lines =====
+22:/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/area.cc:2152:23: error: 'ARegion' does not refer to a value
+29:/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/area.cc:2152:32: error: expected expression
+32:/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/area.cc:2152:34: error: use of undeclared identifier 'sidebar'
+35:/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/area.cc:2266:23: error: 'ARegion' does not refer to a value
+42:/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/area.cc:2266:32: error: expected expression
+45:/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/area.cc:2266:34: error: use of undeclared identifier 'sidebar'
+
+===== build.log (tail) =====
+/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/intern/cycles/device/metal/queue.mm:792:75: warning: 'MTLResourceUsageSample' is deprecated: first deprecated in iOS 16.0 [-Wdeprecated-declarations]
+  792 |       [mtlComputeEncoder_ useResource:it.second->mtlTexture usage:usage | MTLResourceUsageSample];
+      |                                                                           ^~~~~~~~~~~~~~~~~~~~~~
+      |                                                                           MTLResourceUsageRead
+In file included from /Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/intern/cycles/device/metal/queue.mm:10:
+In file included from /Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/intern/cycles/device/metal/queue.h:13:
+In file included from /Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/intern/cycles/device/metal/util.h:9:
+In file included from /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.5.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.h:10:
+In file included from /Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.5.sdk/System/Library/Frameworks/Metal.framework/Headers/MTLBlitCommandEncoder.h:11:
+/Applications/Xcode_16.4.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.5.sdk/System/Library/Frameworks/Metal.framework/Headers/MTLCommandEncoder.h:21:2: note: 'MTLResourceUsageSample' has been explicitly marked deprecated here
+   21 |         MTLResourceUsageSample API_DEPRECATED_WITH_REPLACEMENT("MTLResourceUsageRead", macos(10.13, 13.0), ios(11.0, 16.0)) = 1 << 2
+      |         ^
+1 warning generated.
+/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/gpu/metal/mtl_shader.mm:190:60: warning: unused parameter 'use_subpass_input' [-Wunused-parameter]
+  190 | static ::MTLCompileOptions *get_compile_options(const bool use_subpass_input,
+      |                                                            ^
+1 warning generated.
+/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/gpu/metal/mtl_index_buffer.mm:69:17: warning: unused variable 'ctx' [-Wunused-variable]
+   69 |     MTLContext *ctx = MTLContext::get();
+      |                 ^~~
+1 warning generated.
+/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/area.cc:2152:23: error: 'ARegion' does not refer to a value
+ 2152 |     LISTBASE_FOREACH (ARegion *, sidebar, &area->regionbase) {
+      |                       ^
+In file included from /Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/area.cc:63:
+/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/screen_intern.hh:15:8: note: declared here
+   15 | struct ARegion;
+      |        ^
+/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/area.cc:2152:32: error: expected expression
+ 2152 |     LISTBASE_FOREACH (ARegion *, sidebar, &area->regionbase) {
+      |                                ^
+/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/area.cc:2152:34: error: use of undeclared identifier 'sidebar'
+ 2152 |     LISTBASE_FOREACH (ARegion *, sidebar, &area->regionbase) {
+      |                                  ^
+/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/area.cc:2266:23: error: 'ARegion' does not refer to a value
+ 2266 |     LISTBASE_FOREACH (ARegion *, sidebar, &area->regionbase) {
+      |                       ^
+In file included from /Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/area.cc:63:
+/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/screen_intern.hh:15:8: note: declared here
+   15 | struct ARegion;
+      |        ^
+/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/area.cc:2266:32: error: expected expression
+ 2266 |     LISTBASE_FOREACH (ARegion *, sidebar, &area->regionbase) {
+      |                                ^
+/Users/runner/work/Blender-N-Panel-Bottom/Blender-N-Panel-Bottom/blender/source/blender/editors/screen/area.cc:2266:34: error: use of undeclared identifier 'sidebar'
+ 2266 |     LISTBASE_FOREACH (ARegion *, sidebar, &area->regionbase) {
+      |                                  ^
+6 errors generated.
+note: Run script build phase 'Generate CMakeFiles/ZERO_CHECK' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'ZERO_CHECK' from project 'Blender')
+note: Run script build phase 'Generate source/creator/CMakeFiles/locales' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'locales' from project 'Blender')
+note: Run script build phase 'CMake PostBuild Rules' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'install' from project 'Blender')
+note: Run script build phase 'Generate source/creator/buildinfo.h' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'buildinfo' from project 'Blender')
+note: Run script build phase 'Generate source/creator/CMakeFiles/buildinfo' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'buildinfo' from project 'Blender')
+note: Run script build phase 'Generate CMakeFiles/blender_cross_tools_compile' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'blender_cross_tools_compile' from project 'Blender')
+note: Run script build phase 'Generate CMakeFiles/ALL_BUILD' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'ALL_BUILD' from project 'Blender')
+** BUILD FAILED **
+
+
+===== CMakeError.log (tail) =====
