@@ -67,6 +67,20 @@ assert source.rstrip().endswith("}"), "Unexpected Python compatibility implement
 compat_impl.write_text(source.replace(marker, "#ifndef _PyArg_CheckPositional\n" + marker) + "\n#endif\n")
 print("Guarded existing CPython argument-check implementation")
 
+# Freestyle copies a PyLong using the 3.12+ layout (long_value); 3.11 stores
+# the sign/size in ob_size and the digits in ob_digit.
+fs_convert = root/"source/blender/freestyle/intern/python/BPy_Convert.cpp"
+source = fs_convert.read_text()
+old = "  memcpy(&result->long_value, &value_py->long_value, sizeof(result->long_value));\n"
+assert source.count(old) == 1, "Freestyle PyLong anchor changed"
+new = ("#if PY_VERSION_HEX >= 0x030C0000\n" + old +
+       "#else\n"
+       "  Py_SET_SIZE(result, Py_SIZE(value_py));\n"
+       "  result->ob_digit[0] = value_py->ob_digit[0];\n"
+       "#endif\n")
+fs_convert.write_text(source.replace(old, new))
+print("Patched Freestyle PyLong subtype copy for pre-3.12 CPython")
+
 # Supply newer public APIs to the older iOS SDK through a pinned compatibility header.
 import hashlib
 from urllib.request import urlopen
