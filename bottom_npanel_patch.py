@@ -14,10 +14,10 @@ def transform(space, area):
     assert area.count(old) == 2, 'Region size update anchors changed'
     migration = """  /* iPad bottom N-panel: migrate startup and loaded .blend sidebars before sizing. */
   if (area->spacetype == SPACE_VIEW3D) {
-    LISTBASE_FOREACH (ARegion *, sidebar, &area->regionbase) {
-      if (sidebar->regiontype == RGN_TYPE_UI && sidebar->alignment != RGN_ALIGN_BOTTOM) {
-        sidebar->alignment = RGN_ALIGN_BOTTOM;
-        sidebar->sizey = 240;
+    for (ARegion &sidebar : area->regionbase) {
+      if (sidebar.regiontype == RGN_TYPE_UI && sidebar.alignment != RGN_ALIGN_BOTTOM) {
+        sidebar.alignment = RGN_ALIGN_BOTTOM;
+        sidebar.sizey = 240;
       }
     }
   }
